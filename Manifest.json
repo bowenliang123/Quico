@@ -2,5 +2,14 @@
   "name": "Quico",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "A developer friendly QRcode generator powered by Bowen Liang since 20160310"
+  "description": "A developer friendly QRcode generator powered by Bowen Liang since 20160310",
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "content_scripts":[
+  {
+  	"matches": ["*://*/*"],
+  	"js": ["js/content.js"]
+  }
+  ]
 }
