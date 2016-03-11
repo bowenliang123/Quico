@@ -6,13 +6,18 @@ console.log('popup.js');
 
 //获取当前窗口URL
 chrome.tabs.query({active: true, currentWindow: true}, function (tabArray) {
-    var targetUrl = tabArray[0].url;
+    var currentTab = tabArray[0];
+
+    console.log(currentTab);
+
+    var targetUrl = currentTab.url;
+    var title = currentTab.title;
 
     //生成二维码显示到canvas
     generateQrcode(targetUrl);
 
     //显示网址
-    showUrl(targetUrl);
+    showUrl(title, targetUrl);
 });
 
 
@@ -28,6 +33,7 @@ function generateQrcode(url) {
 }
 
 
-function showUrl(url) {
-    document.getElementById("urlText").innerHTML = url;
+function showUrl(title, url) {
+    document.getElementById("tabTitle").innerHTML = title;
+    document.getElementById("tabUrl").innerHTML = url;
 }
