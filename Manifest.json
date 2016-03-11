@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "A developer friendly QRcode generator powered by Bowen Liang since 20160310",
+  "permissions": [
+    "tabs"
+  ],
   "options_page": "html/options.html",
   "background": {
     "scripts": [
