@@ -1,0 +1,25 @@
+{
+  "name": "quico",
+  "authors": [
+    "梁博文 <lbw105516@alibaba-inc.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "qrcode"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "qrcode.js": "qrcode-js#*"
+  }
+}
