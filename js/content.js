@@ -10,3 +10,6 @@ chrome.extension.sendRequest(
     , function (response) {
         console.log(response.farewell);
     });
+
+var port = chrome.extension.connect({name: 'content'});
+port.postMessage({action: "updateUrl", url: window.location.href});
