@@ -9,6 +9,10 @@
       "js/background.js"
     ]
   },
+  "browser_action": {
+    "default_title": "Quico 二维码生成器",
+    "default_popup": "html/popup.html"
+  },
   "content_scripts": [
     {
       "matches": [
