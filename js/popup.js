@@ -32,8 +32,19 @@ function generateQrcode(url) {
     });
 }
 
-
 function showUrl(title, url) {
     document.getElementById("tabTitle").innerHTML = title;
     document.getElementById("tabUrl").innerHTML = url;
 }
+
+
+//按钮事件 - 主页面按钮
+var mainBtn = document.getElementById("btn-main");
+mainBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    //用新标签打开主面板页
+    chrome.tabs.create({
+        url: 'html/main.html'
+    });
+});
