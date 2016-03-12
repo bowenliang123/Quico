@@ -2,7 +2,6 @@
 
 console.log('background.js');
 
-var latestTab;
 
 //main 页面连接
 var portsToMain = [];
@@ -11,14 +10,13 @@ var portsToMain = [];
 chrome.runtime.onConnect.addListener(function (port) {
     //console.log(port);
 
+    var latestTab = getLatestTab();
     if (port.name == 'main') {
-        //发送最新 url
-        if (latestTab !== undefined) {
-            port.postMessage({
-                action: 'updateTab',
-                tab: latestTab
-            });
-        }
+        //发送 url 更新信息
+        port.postMessage({
+            action: 'updateTab',
+            tab: latestTab
+        });
 
         //加入到广播队列中
         portsToMain.push(port);
@@ -37,7 +35,19 @@ chrome.runtime.onConnect.addListener(function (port) {
 chrome.tabs.onActivated.addListener(function (activeInfo) {
     chrome.tabs.get(activeInfo.tabId, function (tab) {
         //console.log(tab);
-        latestTab = tab;
+
+        //忽略非页面链接
+        if (!tab.url.match(/^http/i)) {
+            return;
+        }
+
+
+        //更新 latestTab
+
+        saveLatestTab(tab);
+
+        var latestTab = getLatestTab();
+
         //广播更新
         getAlivePortsToMain().forEach(function (port) {
 
@@ -67,4 +77,25 @@ function getAlivePortsToMain() {
     });
 
     return portsToMain;
+}
+
+
+function getLatestTab() {
+    //读取 localstorage
+    let latestTabStr = window.localStorage.getItem('latestTab');
+    if (latestTabStr == undefined) {
+        return undefined;
+    }
+    
+    //反序列化
+    return JSON.parse(latestTabStr);
+}
+
+function saveLatestTab(tab) {
+    if (tab == undefined) {
+        return;
+    }
+
+    //序列化 tab 存入 localstorage
+    window.localStorage.setItem('latestTab', JSON.stringify(tab));
 }

@@ -4,7 +4,8 @@
   "manifest_version": 2,
   "description": "The best QRCode tools designed for developers by Bowen Liang since 20160310",
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "options_page": "html/options.html",
   "background": {

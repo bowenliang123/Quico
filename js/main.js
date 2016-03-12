@@ -18,11 +18,11 @@ initConnctionToBackground(port);
 function initConnctionToBackground(port) {
     port = chrome.runtime.connect({name: 'main'});
 
-    console.info('port connected.');
+    console.info('connected to background.');
 
     //响应断开, 自动重连
     port.onDisconnect.addListener(function () {
-        console.info('port onDisconnect. trying to reconnect.');
+        console.warn('background connection onDisconnect. trying to reconnect.');
 
         //重连
         initConnctionToBackground(port);
@@ -31,7 +31,7 @@ function initConnctionToBackground(port) {
     //响应消息
     port.onMessage.addListener(function (msg) {
 
-        //console.log(msg);
+        console.log('onMessage', msg.action, msg.tab.url);
 
         if (msg.action == 'updateTab') {
 
