@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="quicoApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,16 +7,62 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+
+    <!-- angular v1 -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="../bower_components/angular/angular.js"></script>
+
+
+    <link rel="stylesheet" href="../css/app.css">
 </head>
-<body>
+<body ng-controller="mainCtrl">
 
-<h1>Quico 主面板</h1>
-<hr>
+<div class="container">
+    <nav class="navbar navbar-light bg-faded">
+        <h1 class="navbar-brand">Quico 快码</h1>
+    </nav>
+    <hr>
 
-<div id="qrcode"></div>
+    <div class="row p-y-1">
+        <div class="col-sm-6 col-sm-offset-1">
+            <div class="row">
+                <textarea ng-model="currentUrl" ng-change="onCurrentUrlChange()" rows="5"></textarea>
+            </div>
+            <div class="row">
+                <button class="btn btn-primary">AddToHistory</button>
+            </div>
+        </div>
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-3">
+            <img class="img-fluid img-thumbnail" src="{{currentQrBase64}}"
+                 ng-if="currentUrl!=undefined && currentQrBase64!=undefined">
+        </div>
+    </div>
 
-<p id="tabUrl"></p>
-<p id="tabTitle"></p>
+    <hr>
+
+    <div id="qrcode" hidden></div>
+
+    <p id="tabUrl" hidden></p>
+    <p id="tabTitle" hidden></p>
+
+    <div class="row">
+        <div class="col-sm-6 m-y-1" ng-repeat="aQrcode in qrCodeList">
+            <div class="col-sm-4">
+                <img class="img-fluid img-thumbnail" src="{{aQrcode.base64QrImg}}">
+            </div>
+            <div class="col-sm-8">
+                <a class="text-breakall text-primary" href="{{aQrcode.url}}" target="_blank">{{aQrcode.url}}</a>
+                <p class="text-breakall font-italic text-muted">{{aQrcode.title}}</p>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
 
 </body>
 
@@ -26,6 +72,10 @@
 
 <!--lib-->
 <script src="../bower_components/qrcode.js/qrcode.js"></script>
+
+<!--angular app-->
+<script src="../app/controllers.js"></script>
+<script src="../app/mainCtrl.js"></script>
 
 <!--app-->
 <script src="../js/util/qr_util.js"></script>
