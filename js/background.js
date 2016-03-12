@@ -6,7 +6,7 @@ var latestTab;
 
 var ports = [];
 //监听长时间连接
-chrome.extension.onConnect.addListener(function (port) {
+chrome.runtime.onConnect.addListener(function (port) {
     //console.log(port);
 
     if (port.name == 'main') {

@@ -6,7 +6,11 @@ console.info('main.js');
 
 var qrcode;
 
-var port = chrome.extension.connect({name: 'main'});
+var port = chrome.runtime.connect({name: 'main'});
+
+//响应断开
+
+//响应消息
 port.onMessage.addListener(function (msg) {
 
     //console.log(msg);
