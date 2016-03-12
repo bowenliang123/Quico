@@ -15,7 +15,7 @@ function initQrcodeGenerator(elementId, side) {
         side: 128,  //边长
         colorDark: "#000000",    //深色
         colorLight: "#ffffff",  //浅色
-        correctLevel: QRCode.CorrectLevel.H
+        correctLevel: QRCode.CorrectLevel.L
     };
 
     //初始化二维码生成器

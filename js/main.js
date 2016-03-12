@@ -9,6 +9,13 @@ var port = chrome.extension.connect({name: 'main'});
 port.onMessage.addListener(function (msg) {
     console.log(msg);
     if (msg.action == 'updateUrl') {
+
+        //忽略非页面链接
+        if (!msg.url.match(/^http/i)) {
+            return;
+        }
+
+        //更新二维码
         displayQrcode(msg.url);
     }
 });
@@ -20,9 +27,9 @@ port.onMessage.addListener(function (msg) {
  */
 function displayQrcode(url) {
     if (qrcode == undefined) {
-        qrcode = initQrcodeGenerator('qrcode');
+        qrcode = initQrcodeGenerator('qrcode', 250);
     }
 
-    qrcode.clear();
+    //重绘
     qrcode.makeCode(url);
 }

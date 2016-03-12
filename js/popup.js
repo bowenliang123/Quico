@@ -32,7 +32,6 @@ function displayQrcode(url) {
         qrcode = initQrcodeGenerator('qrcode', 200);
     }
 
-    qrcode.clear();
     qrcode.makeCode(url);
 }
 

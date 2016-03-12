@@ -28,26 +28,25 @@ chrome.extension.onConnect.addListener(function (port) {
         //标记连接断开
         port.isDisconnected = true;
     });
+});
 
-    //onMessage 响应消息请求
-    port.onMessage.addListener(function (msg) {
-        console.log(msg);
-        if (msg.action == "updateUrl") {
 
-            //更新latestUrl
-            latestUrl = msg.url;
-
-            //广播更新
-            ports.forEach(function (port) {
-                //检查连接是否已断开
-                if (!port.isDisconnected) {
-                    //发送 url 更新信息
-                    port.postMessage({
-                        action: 'updateUrl',
-                        url: latestUrl
-                    });
-                }
-            });
-        }
+//监听标签变化
+//https://developer.chrome.com/extensions/tabs#event-onActivated
+chrome.tabs.onActivated.addListener(function (activeInfo) {
+    chrome.tabs.get(activeInfo.tabId, function (tab) {
+        console.log(tab);
+        latestUrl = tab.url;
+        //广播更新
+        ports.forEach(function (port) {
+            //检查连接是否已断开
+            if (!port.isDisconnected) {
+                //发送 url 更新信息
+                port.postMessage({
+                    action: 'updateUrl',
+                    url: latestUrl
+                });
+            }
+        });
     });
 });
