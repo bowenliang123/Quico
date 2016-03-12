@@ -6,31 +6,51 @@ console.info('main.js');
 
 var qrcode;
 
-var port = chrome.runtime.connect({name: 'main'});
+var port;
 
-//响应断开
 
-//响应消息
-port.onMessage.addListener(function (msg) {
+initConnctionToBackground(port);
 
-    //console.log(msg);
+/**
+ * 向背景页建立连接, 以及加上事件响应
+ * @returns {*|{server}}
+ */
+function initConnctionToBackground(port) {
+    port = chrome.runtime.connect({name: 'main'});
 
-    if (msg.action == 'updateTab') {
+    console.info('port connected.');
 
-        var tab = msg.tab;
+    //响应断开, 自动重连
+    port.onDisconnect.addListener(function () {
+        console.info('port onDisconnect. trying to reconnect.');
 
-        //忽略非页面链接
-        if (!tab.url.match(/^http/i)) {
-            return;
+        //重连
+        initConnctionToBackground(port);
+    });
+
+    //响应消息
+    port.onMessage.addListener(function (msg) {
+
+        //console.log(msg);
+
+        if (msg.action == 'updateTab') {
+
+            var tab = msg.tab;
+
+            //忽略非页面链接
+            if (!tab.url.match(/^http/i)) {
+                return;
+            }
+
+            //更新二维码
+            displayQrcode(tab.url);
+
+            displayMetaInfo(tab.title, tab.url);
+
         }
-
-        //更新二维码
-        displayQrcode(tab.url);
-
-        displayMetaInfo(tab.title, tab.url);
-
-    }
-});
+    });
+    return port;
+}
 
 
 /**

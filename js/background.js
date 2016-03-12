@@ -4,7 +4,9 @@ console.log('background.js');
 
 var latestTab;
 
-var ports = [];
+//main 页面连接
+var portsToMain = [];
+
 //监听长时间连接
 chrome.runtime.onConnect.addListener(function (port) {
     //console.log(port);
@@ -19,7 +21,7 @@ chrome.runtime.onConnect.addListener(function (port) {
         }
 
         //加入到广播队列中
-        ports.push(port);
+        portsToMain.push(port);
     }
 
     //onDisconnect 响应连接断开
@@ -37,7 +39,7 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
         //console.log(tab);
         latestTab = tab;
         //广播更新
-        getAlivePorts().forEach(function (port) {
+        getAlivePortsToMain().forEach(function (port) {
 
             //发送 url 更新信息
             port.postMessage({
@@ -48,13 +50,21 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
     });
 });
 
-function getAlivePorts() {
-    if (ports == undefined || ports.length == 0) {
+/**
+ * 获取所有存活连接
+ * @returns {Array}
+ */
+function getAlivePortsToMain() {
+    if (portsToMain == undefined || portsToMain.length == 0) {
         return [];
     }
 
-    return ports.filter(function (port) {
+
+    //删除已断开的链接
+    portsToMain = portsToMain.filter(function (port) {
         //检查连接是否已断开
         return !port.isDisconnected;
-    })
+    });
+
+    return portsToMain;
 }
