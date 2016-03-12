@@ -6,11 +6,24 @@ angular.module('mainCtrl', [])
         $scope.qrCodeList = [];
         $scope.latestTab = undefined;
         $scope.currentUrl = '';
+        $scope.parser = undefined;
 
 
         var refreshQrcodeImage = function () {
             $scope.currentQrBase64 = displayQrcode($scope.currentUrl);
-        }
+
+            $scope.parser = document.createElement('a');
+            $scope.parser.href = $scope.currentUrl;
+
+            //$scope.parser.protocol; // => "http:"
+            //$scope.parser.hostname; // => "example.com"
+            //$scope.parser.port;     // => "3000"
+            //$scope.parser.pathname; // => "/pathname/"
+            //$scope.parser.search;   // => "?search=test"
+            //$scope.parser.hash;     // => "#hash"
+            //$scope.parser.host;     // => "example.com:3000"
+
+        };
 
         var qrcode;
 
