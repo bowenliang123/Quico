@@ -20,6 +20,6 @@
     "tests"
   ],
   "dependencies": {
-    "qr-js": "^1.1.4"
+    "qrcode.js": "qrcode-js#*"
   }
 }

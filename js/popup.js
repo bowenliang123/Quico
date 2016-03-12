@@ -1,8 +1,12 @@
 /**
  * Created by bowen on 16/3/11.
  */
+'use strict';
 
 console.log('popup.js');
+
+//变量
+var qrcode;
 
 //获取当前窗口URL
 chrome.tabs.query({active: true, currentWindow: true}, function (tabArray) {
@@ -24,10 +28,12 @@ chrome.tabs.query({active: true, currentWindow: true}, function (tabArray) {
  * @param url
  */
 function displayQrcode(url) {
-    let qrCodeBase64 = qr.toDataURL(url);
-    console.log(qrCodeBase64);
-    let qrcode_img = document.getElementById('qrcode-img');
-    qrcode_img.src = qrCodeBase64;
+    if (qrcode == undefined) {
+        qrcode = initQrcodeGenerator('qrcode', 200);
+    }
+
+    qrcode.clear();
+    qrcode.makeCode(url);
 }
 
 

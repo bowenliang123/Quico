@@ -2,15 +2,26 @@
 
 console.log('background.js');
 
+var latestUrl;
+
 
 var ports = [];
 //监听长时间连接
 chrome.extension.onConnect.addListener(function (port) {
-    console.log('onConnect:' + port.name);
-    if (port.name != 'content') {
+    console.log('onConnect:');
+    console.log(port);
+    if (port.name == 'main') {
+        //发送最新 url
+        if (latestUrl !== undefined) {
+            port.postMessage({
+                action: 'updateUrl',
+                url: latestUrl
+            });
+        }
+
+        //加入到广播队列中
         ports.push(port);
     }
-    console.log(ports);
 
     //onDisconnect 响应连接断开
     port.onDisconnect.addListener(function (msg) {
@@ -22,7 +33,9 @@ chrome.extension.onConnect.addListener(function (port) {
     port.onMessage.addListener(function (msg) {
         console.log(msg);
         if (msg.action == "updateUrl") {
-            console.log(msg);
+
+            //更新latestUrl
+            latestUrl = msg.url;
 
             //广播更新
             ports.forEach(function (port) {
@@ -30,8 +43,8 @@ chrome.extension.onConnect.addListener(function (port) {
                 if (!port.isDisconnected) {
                     //发送 url 更新信息
                     port.postMessage({
-                        action:'updateUrl',
-                        url: msg.url
+                        action: 'updateUrl',
+                        url: latestUrl
                     });
                 }
             });
