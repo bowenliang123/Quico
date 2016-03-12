@@ -3,7 +3,7 @@
  */
 
 function initQrcodeGenerator(elementId, side) {
-    console.log('initQrcodeGenerator');
+    //console.log('initQrcodeGenerator');
 
     let element = document.getElementById(elementId);
     if (element == null) {
