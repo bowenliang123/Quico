@@ -8,31 +8,35 @@ console.log('popup.js');
 chrome.tabs.query({active: true, currentWindow: true}, function (tabArray) {
     var currentTab = tabArray[0];
 
-    console.log(currentTab);
-
-    var targetUrl = currentTab.url;
-    var title = currentTab.title;
+    var currentUrl = currentTab.url;
+    var currentTitle = currentTab.title;
 
     //生成二维码显示到canvas
-    generateQrcode(targetUrl);
+    displayQrcode(currentUrl);
 
     //显示网址
-    showUrl(title, targetUrl);
+    displayMetaInfo(currentTitle, currentUrl);
 });
 
 
-function generateQrcode(url) {
-    var qrcode = new QRCode(document.getElementById("qrcode"), {
-        text: url,
-        width: 200,
-        height: 200,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-    });
+/**
+ * 生成并显示二维码
+ * @param url
+ */
+function displayQrcode(url) {
+    let qrCodeBase64 = qr.toDataURL(url);
+    console.log(qrCodeBase64);
+    let qrcode_img = document.getElementById('qrcode-img');
+    qrcode_img.src = qrCodeBase64;
 }
 
-function showUrl(title, url) {
+
+/**
+ * 显示标题和 URL
+ * @param title
+ * @param url
+ */
+function displayMetaInfo(title, url) {
     document.getElementById("tabTitle").innerHTML = title;
     document.getElementById("tabUrl").innerHTML = url;
 }
