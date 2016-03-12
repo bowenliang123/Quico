@@ -37,15 +37,24 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
         //console.log(tab);
         latestTab = tab;
         //广播更新
-        ports.forEach(function (port) {
-            //检查连接是否已断开
-            if (!port.isDisconnected) {
-                //发送 url 更新信息
-                port.postMessage({
-                    action: 'updateTab',
-                    tab: latestTab
-                });
-            }
+        getAlivePorts().forEach(function (port) {
+
+            //发送 url 更新信息
+            port.postMessage({
+                action: 'updateTab',
+                tab: latestTab
+            });
         });
     });
 });
+
+function getAlivePorts() {
+    if (ports == undefined || ports.length == 0) {
+        return [];
+    }
+
+    return ports.filter(function (port) {
+        //检查连接是否已断开
+        return !port.isDisconnected;
+    })
+}
