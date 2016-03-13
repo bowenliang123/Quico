@@ -17,9 +17,6 @@ chrome.tabs.query({active: true, currentWindow: true}, function (tabArray) {
 
     //生成二维码显示到canvas
     displayQrcode(currentUrl);
-
-    //显示网址
-    displayMetaInfo(currentTitle, currentUrl);
 });
 
 
@@ -33,17 +30,6 @@ function displayQrcode(url) {
     }
 
     qrcode.makeCode(url);
-}
-
-
-/**
- * 显示标题和 URL
- * @param title
- * @param url
- */
-function displayMetaInfo(title, url) {
-    document.getElementById("tabTitle").innerHTML = title;
-    document.getElementById("tabUrl").innerHTML = url;
 }
 
 
