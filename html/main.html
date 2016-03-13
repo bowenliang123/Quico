@@ -22,13 +22,30 @@
                 <p class="m-b-0">Quico 快码</p>
                 <p class="m-y-0">次世代生产力二维码工具</cite></p>
             </blockquote>
+
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-info">Most recent URLs</li>
+
+                <li class="list-group-item" ng-repeat="aQrcode in qrCodeList" ng-click="onClickRecentUrls(aQrcode.url)">
+                    <div class="row">
+                        <div class="col-sm-4 p-x-0">
+                            <img class="img-fluid" ng-src="{{aQrcode.base64QrImg}}">
+                        </div>
+                        <div class="col-sm-8 p-r-0">
+                            <a class="text-breakall text-primary" href="{{aQrcode.url}}"
+                               target="_blank">{{aQrcode.url}}</a>
+                            <p class="text-breakall font-italic text-muted">{{aQrcode.title}}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
 
 
         <div class="col-sm-5 m-y-1">
             <form>
                 <div class="form-group row">
-                    <label for="texteraFullUrl" class="col-sm-2 form-control-label">Full Url</label>
+                    <label for="texteraFullUrl" class="col-sm-2 form-control-label">Full URL</label>
                     <div class="col-sm-10">
                         <textarea id="texteraFullUrl" class="form-control"
                                   ng-model="currentUrl" ng-change="onChangeUrlTexteara()"
@@ -94,22 +111,7 @@
             </div>
 
 
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-info">Most recent URLs</li>
 
-                <li class="list-group-item" ng-repeat="aQrcode in qrCodeList" ng-click="onClickRecentUrls(aQrcode.url)">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img class="img-fluid " ng-src="{{aQrcode.base64QrImg}}">
-                        </div>
-                        <div class="col-sm-9">
-                            <a class="text-breakall text-primary" href="{{aQrcode.url}}"
-                               target="_blank">{{aQrcode.url}}</a>
-                            <p class="text-breakall font-italic text-muted">{{aQrcode.title}}</p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
 
         </div>
 
