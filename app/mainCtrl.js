@@ -19,22 +19,23 @@ angular.module('mainCtrl', [])
             base64img: ''
         };
 
-        let urlReg = /^(https?:\/\/[\w\d.]+)(\/?$|[\w\d\/.]+)\??(.*)/i;
+        let urlReg = /^(https?:\/\/[\w\d.]+)(\/?$|[\w\d\/.]+)\??([\w\d=&]*)\#?(.*)/i;
 
 
         var refreshQrcodeImage = function () {
             $scope.currentCase.base64img = displayQrcode($scope.currentUrl);
 
-            var mathedArr = urlReg.exec($scope.currentUrl);
+            let mathedArr = urlReg.exec($scope.currentUrl);
             if (mathedArr == null) {
                 //忽略非网址结构文本
                 return;
             }
 
-            $scope.currentCase.base = mathedArr[1];
-            $scope.currentCase.path = mathedArr[2];
-            $scope.currentCase.query = mathedArr[3];
-            $scope.currentCase.url = $scope.currentUrl;
+            $scope.currentBase = mathedArr[1];
+            $scope.currentPath = mathedArr[2];
+            $scope.currentQuery = mathedArr[3];
+            $scope.currentHash = mathedArr[4];
+            //$scope.currentCase.url = $scope.currentUrl;
             //$scope.currentCase.base64img = displayQrcode($scope.currentUrl);
 
             //解析地址结构
@@ -85,7 +86,7 @@ angular.module('mainCtrl', [])
 
                 if (msg.action == 'updateTab') {
 
-                    var tab = msg.tab;
+                    let tab = msg.tab;
 
                     //忽略非页面链接
                     if (!tab.url.match(/^http/i)) {
@@ -134,5 +135,22 @@ angular.module('mainCtrl', [])
 
         //事件注册
         $scope.onChangeUrlTexteara = refreshQrcodeImage;
+
+        $scope.onChangeUrlDetails = function () {
+
+            let newUrl = [
+                $scope.currentBase,
+                $scope.currentPath,
+                ($scope.currentQuery == '') ? '' : ('?' + $scope.currentQuery),
+                ($scope.currentHash == '') ? '' : ('#' + $scope.currentHash)
+            ].join('');
+
+            $scope.currentUrl = newUrl;
+
+            refreshQrcodeImage();
+
+            //$scope.$apply();
+        }
+
 
     });
