@@ -11,14 +11,35 @@ angular.module('mainCtrl', [])
         //$scope.parsedUrl = {
         //}
 
+        $scope.currentCase = {
+            fullUrl: '',
+            base: '',
+            path: '',
+            query: '',
+            base64img: ''
+        };
+
+        let urlReg = /^(https?:\/\/[\w\d.]+)(\/?$|[\w\d\/.]+)\??(.*)/i;
+
 
         var refreshQrcodeImage = function () {
-            $scope.currentQrBase64 = displayQrcode($scope.currentUrl);
+            $scope.currentCase.base64img = displayQrcode($scope.currentUrl);
 
+            var mathedArr = urlReg.exec($scope.currentUrl);
+            if (mathedArr == null) {
+                //忽略非网址结构文本
+                return;
+            }
+
+            $scope.currentCase.base = mathedArr[1];
+            $scope.currentCase.path = mathedArr[2];
+            $scope.currentCase.query = mathedArr[3];
+            $scope.currentCase.url = $scope.currentUrl;
+            //$scope.currentCase.base64img = displayQrcode($scope.currentUrl);
 
             //解析地址结构
-            $scope.parser = document.getElementById('hiddenA');
-            $scope.parser.href = $scope.currentUrl;
+            //$scope.parser = document.getElementById('hiddenA');
+            //$scope.parser.href = $scope.currentUrl;
 
             //$scope.parser.protocol; // => "http:"
             //$scope.parser.hostname; // => "example.com"
@@ -34,8 +55,10 @@ angular.module('mainCtrl', [])
         var port;
 
 
+        //初始化与背景页的链接
         initConnctionToBackground(port);
 
+        //刷新从后台获取的页面
         refreshQrcodeImage();
 
         /**
@@ -109,6 +132,7 @@ angular.module('mainCtrl', [])
         }
 
 
-        $scope.onCurrentUrlChange = refreshQrcodeImage;
+        //事件注册
+        $scope.onChangeUrlTexteara = refreshQrcodeImage;
 
     });

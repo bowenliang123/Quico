@@ -26,33 +26,23 @@
 
 
         <div class="col-sm-5 m-y-1">
-            <!--<div class="row">-->
-            <!--<textarea ng-model="currentUrl" ng-change="onCurrentUrlChange()" rows="5"></textarea>-->
-            <!--</div>-->
-            <!--<div class="row">-->
-            <!--<p>{{parser.protocol}}//{{parser.hostname}}</p>-->
-            <!--&lt;!&ndash;<p>{{parser.port}}</p>&ndash;&gt;-->
-            <!--<p>{{parser.pathname}}</p>-->
-            <!--<p>{{parser.search}}</p>-->
-            <!--<p>{{parser.hash }}</p>-->
-            <!--</div>-->
             <form>
                 <div class="form-group row">
                     <label for="texteraFullUrl" class="col-sm-2 form-control-label">FullUrl</label>
                     <div class="col-sm-10">
                         <textarea id="texteraFullUrl" class="form-control"
-                                  ng-model="currentUrl" ng-change="onCurrentUrlChange()"
+                                  ng-model="currentUrl" ng-change="onChangeUrlTexteara()"
                                   style="word-break: break-all"
                                   rows="5"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputDomain" class="col-sm-2 form-control-label">Domain</label>
+                    <label for="inputDomain" class="col-sm-2 form-control-label">Base</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-sm" id="inputDomain"
                                placeholder="http://domain.com"
-                               ng-value="parser.protocol + parser.hostname">
+                               ng-value="currentCase.base">
                     </div>
                 </div>
 
@@ -60,7 +50,7 @@
                     <label for="inputPath" class="col-sm-2 form-control-label">Path</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-sm" id="inputPath" placeholder="/path"
-                               ng-value="parser.pathname">
+                               ng-value="currentCase.path">
                     </div>
                 </div>
 
@@ -68,16 +58,8 @@
                 <div class="form-group row">
                     <label for="inputQuery" class="col-sm-2 form-control-label">Query</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-sm" id="inputQuery" placeholder="?key=value"
-                               ng-value="parser.search">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="inputHash" class="col-sm-2 form-control-label">Hash</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-sm" id="inputHash" placeholder="#hash"
-                               ng-value="parser.hash">
+                        <input type="text" class="form-control form-control-sm" id="inputQuery" placeholder="key=value"
+                               ng-value="currentCase.query">
                     </div>
                 </div>
             </form>
@@ -89,8 +71,7 @@
             <div class="row m-y-1">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8">
-                    <img class="img-fluid img-thumbnail" ng-src="{{currentQrBase64}}"
-                         ng-if="currentUrl!=undefined && currentQrBase64!=undefined">
+                    <img class="img-fluid img-thumbnail" ng-src="{{currentCase.base64img}}">
                 </div>
                 <div class="col-sm-2"></div>
             </div>
@@ -118,13 +99,12 @@
 </div>
 
 <hr>
-<!--<div class="center-block">Powered by Bowen Liang.</div>-->
 
 <div id="qrcode" hidden>
 
     <p id="tabUrl" hidden></p>
     <p id="tabTitle" hidden></p>
-    <a id="hiddenA"></a>
+    <!--<a id="hiddenA"></a>-->
 </div>
 
 </body>
