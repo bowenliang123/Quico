@@ -20,7 +20,7 @@
         <div class="col-sm-3">
             <blockquote class="blockquote ">
                 <p class="m-b-0">Quico 快码</p>
-                <p class="text-">次世代生产力二维码工具</cite></p>
+                <p class="m-y-0">次世代生产力二维码工具</cite></p>
             </blockquote>
         </div>
 
@@ -96,7 +96,8 @@
 
             <ul class="list-group">
                 <li class="list-group-item list-group-item-info">Most recent URLs</li>
-                <li class="list-group-item" ng-repeat="aQrcode in qrCodeList">
+
+                <li class="list-group-item" ng-repeat="aQrcode in qrCodeList" ng-click="onClickRecentUrls(aQrcode.url)">
                     <div class="row">
                         <div class="col-sm-3">
                             <img class="img-fluid " ng-src="{{aQrcode.base64QrImg}}">

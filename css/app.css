@@ -7,8 +7,6 @@ textarea {
 
     font-size: 18px;
     font-weight: bold;
-
-    resize: none;   !important;
 }
 
 .text-breakall {

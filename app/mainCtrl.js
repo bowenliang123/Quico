@@ -19,7 +19,7 @@ angular.module('mainCtrl', [])
             base64img: ''
         };
 
-        let urlReg = /^(https?:\/\/[\w\d.]+)(\/?$|[\w\d\/.]+)\??([\w\d=&]*)\#?(.*)/i;
+        let urlReg = /^(https?:\/\/[\w\d.]+)(\/?$|[\w\d\/.]+)\??([\w\d\-=%&]*)\#?(.*)/i;
 
 
         var refreshQrcodeImage = function () {
@@ -149,7 +149,13 @@ angular.module('mainCtrl', [])
 
             refreshQrcodeImage();
 
-            //$scope.$apply();
+
+        }
+
+
+        $scope.onClickRecentUrls = function (url) {
+            $scope.currentUrl = url;
+            refreshQrcodeImage();
         }
 
 
