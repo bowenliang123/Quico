@@ -8,11 +8,16 @@ angular.module('mainCtrl', [])
         $scope.currentUrl = '';
         $scope.parser = undefined;
 
+        //$scope.parsedUrl = {
+        //}
+
 
         var refreshQrcodeImage = function () {
             $scope.currentQrBase64 = displayQrcode($scope.currentUrl);
 
-            $scope.parser = document.createElement('a');
+
+            //解析地址结构
+            $scope.parser = document.getElementById('hiddenA');
             $scope.parser.href = $scope.currentUrl;
 
             //$scope.parser.protocol; // => "http:"
@@ -22,7 +27,6 @@ angular.module('mainCtrl', [])
             //$scope.parser.search;   // => "?search=test"
             //$scope.parser.hash;     // => "#hash"
             //$scope.parser.host;     // => "example.com:3000"
-
         };
 
         var qrcode;

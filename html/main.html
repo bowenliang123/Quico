@@ -8,72 +8,126 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 
-    <!-- jQuery first, then Bootstrap JS. -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-
-    <!-- angular v1 -->
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
-    <script src="../bower_components/angular/angular.js"></script>
-
-
+    <!--app css-->
     <link rel="stylesheet" href="../css/app.css">
 </head>
 <body ng-controller="mainCtrl">
 
-<div class="container">
+<div class="container-fluid">
     <nav class="navbar navbar-light bg-faded">
         <h1 class="navbar-brand">Quico 快码</h1>
     </nav>
-    <hr>
 
     <div class="row p-y-1">
-        <div class="col-sm-6 col-sm-offset-1">
-            <div class="row">
-                <textarea ng-model="currentUrl" ng-change="onCurrentUrlChange()" rows="5"></textarea>
-            </div>
-            <div class="row">
-                <p>{{parser.protocol}}</p>
-                <p>{{parser.hostname}}</p>
-                <p>{{parser.port}}</p>
-                <p>{{parser.pathname}}</p>
-                <p>{{parser.search}}</p>
-                <p>{{parser.hash }}</p>
-            </div>
-        </div>
+
         <div class="col-sm-1">
         </div>
-        <div class="col-sm-3">
-            <img class="img-fluid img-thumbnail" src="{{currentQrBase64}}"
+
+        <div class="col-sm-4">
+            <!--<div class="row">-->
+            <!--<textarea ng-model="currentUrl" ng-change="onCurrentUrlChange()" rows="5"></textarea>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<p>{{parser.protocol}}//{{parser.hostname}}</p>-->
+            <!--&lt;!&ndash;<p>{{parser.port}}</p>&ndash;&gt;-->
+            <!--<p>{{parser.pathname}}</p>-->
+            <!--<p>{{parser.search}}</p>-->
+            <!--<p>{{parser.hash }}</p>-->
+            <!--</div>-->
+            <form>
+                <div class="form-group row">
+                    <label for="texteraFullUrl" class="col-sm-2 form-control-label">FullUrl</label>
+                    <div class="col-sm-10">
+                        <textarea id="texteraFullUrl" class="form-control"
+                                  ng-model="currentUrl" ng-change="onCurrentUrlChange()"
+                                  style="word-break: break-all"
+                                  rows="5"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputDomain" class="col-sm-2 form-control-label">Domain</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" id="inputDomain"
+                               placeholder="http://domain.com"
+                               value="{{parser.protocol}}//{{parser.hostname}}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputPath" class="col-sm-2 form-control-label">Path</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" id="inputPath" placeholder="/path"
+                               value="{{parser.pathname}}">
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="inputQuery" class="col-sm-2 form-control-label">Query</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" id="inputQuery" placeholder="?key=value"
+                               value="{{parser.search}}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputHash" class="col-sm-2 form-control-label">Hash</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" id="inputHash" placeholder="#hash"
+                               value="{{parser.hash}}">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="col-sm-2">
+            <img class="img-fluid img-thumbnail" ng-src="{{currentQrBase64}}"
                  ng-if="currentUrl!=undefined && currentQrBase64!=undefined">
+        </div>
+
+
+
+        <div class="col-sm-6">
         </div>
     </div>
 
     <hr>
 
-    <div id="qrcode" hidden></div>
+    <div>
+
+        <div class="row">
+            <div class="col-sm-4 m-y-1" ng-repeat="aQrcode in qrCodeList">
+                <div class="col-sm-5">
+                    <img class="img-fluid img-thumbnail" ng-src="{{aQrcode.base64QrImg}}">
+                </div>
+                <div class="col-sm-7">
+                    <a class="text-breakall text-primary" href="{{aQrcode.url}}" target="_blank">{{aQrcode.url}}</a>
+                    <p class="text-breakall font-italic text-muted">{{aQrcode.title}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="qrcode" hidden>
 
     <p id="tabUrl" hidden></p>
     <p id="tabTitle" hidden></p>
-
-    <div class="row">
-        <div class="col-sm-6 m-y-1" ng-repeat="aQrcode in qrCodeList">
-            <div class="col-sm-5">
-                <img class="img-fluid img-thumbnail" src="{{aQrcode.base64QrImg}}">
-            </div>
-            <div class="col-sm-7">
-                <a class="text-breakall text-primary" href="{{aQrcode.url}}" target="_blank">{{aQrcode.url}}</a>
-                <p class="text-breakall font-italic text-muted">{{aQrcode.title}}</p>
-            </div>
-        </div>
-    </div>
-
-
+    <a id="hiddenA"></a>
 </div>
 
-
 </body>
+
+<!-- jQuery first, then Bootstrap JS. -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+<!-- angular v1 -->
+<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+<script src="../bower_components/angular/angular.js"></script>
 
 
 <!--lib-->
