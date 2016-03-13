@@ -19,7 +19,7 @@ angular.module('mainCtrl', [])
             base64img: ''
         };
 
-        let urlReg = /^(https?:\/\/[\w\d.]+)(\/?$|[\w\d\/.]+)\??([\w\d\-=%&]*)\#?(.*)/i;
+        let urlReg = /^(https?:\/\/[\w\d\-.]+)(\/?$|[\w\d\/.]+)\??([\w\d\-=%&]*)\#?(.*)/i;
 
 
         var refreshQrcodeImage = function () {
