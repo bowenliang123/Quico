@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>main</title>
+    <title>Quico</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -11,19 +11,21 @@
     <!--app css-->
     <link rel="stylesheet" href="../css/app.css">
 </head>
-<body ng-controller="mainCtrl">
+<body ng-controller="mainCtrl" class="">
 
 <div class="container-fluid">
-    <nav class="navbar navbar-light bg-faded">
-        <h1 class="navbar-brand">Quico 快码</h1>
-    </nav>
 
-    <div class="row p-y-1">
+    <div class="row m-y-1">
 
-        <div class="col-sm-1">
+        <div class="col-sm-3">
+            <blockquote class="blockquote ">
+                <p class="m-b-0">Quico 快码</p>
+                <footer class="blockquote-footer">次时代生产力二维码工具</cite></footer>
+            </blockquote>
         </div>
 
-        <div class="col-sm-4">
+
+        <div class="col-sm-5 m-y-1">
             <!--<div class="row">-->
             <!--<textarea ng-model="currentUrl" ng-change="onCurrentUrlChange()" rows="5"></textarea>-->
             <!--</div>-->
@@ -50,7 +52,7 @@
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-sm" id="inputDomain"
                                placeholder="http://domain.com"
-                               value="{{parser.protocol}}//{{parser.hostname}}">
+                               ng-value="parser.protocol + parser.hostname">
                     </div>
                 </div>
 
@@ -58,7 +60,7 @@
                     <label for="inputPath" class="col-sm-2 form-control-label">Path</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-sm" id="inputPath" placeholder="/path"
-                               value="{{parser.pathname}}">
+                               ng-value="parser.pathname">
                     </div>
                 </div>
 
@@ -67,7 +69,7 @@
                     <label for="inputQuery" class="col-sm-2 form-control-label">Query</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-sm" id="inputQuery" placeholder="?key=value"
-                               value="{{parser.search}}">
+                               ng-value="parser.search">
                     </div>
                 </div>
 
@@ -75,41 +77,48 @@
                     <label for="inputHash" class="col-sm-2 form-control-label">Hash</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-sm" id="inputHash" placeholder="#hash"
-                               value="{{parser.hash}}">
+                               ng-value="parser.hash">
                     </div>
                 </div>
             </form>
         </div>
 
 
-        <div class="col-sm-2">
-            <img class="img-fluid img-thumbnail" ng-src="{{currentQrBase64}}"
-                 ng-if="currentUrl!=undefined && currentQrBase64!=undefined">
-        </div>
+        <div class="col-sm-4">
 
-
-
-        <div class="col-sm-6">
-        </div>
-    </div>
-
-    <hr>
-
-    <div>
-
-        <div class="row">
-            <div class="col-sm-4 m-y-1" ng-repeat="aQrcode in qrCodeList">
-                <div class="col-sm-5">
-                    <img class="img-fluid img-thumbnail" ng-src="{{aQrcode.base64QrImg}}">
+            <div class="row m-y-1">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <img class="img-fluid img-thumbnail" ng-src="{{currentQrBase64}}"
+                         ng-if="currentUrl!=undefined && currentQrBase64!=undefined">
                 </div>
-                <div class="col-sm-7">
-                    <a class="text-breakall text-primary" href="{{aQrcode.url}}" target="_blank">{{aQrcode.url}}</a>
-                    <p class="text-breakall font-italic text-muted">{{aQrcode.title}}</p>
-                </div>
+                <div class="col-sm-2"></div>
             </div>
+
+
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-info">Most recent URLs</li>
+                <li class="list-group-item" ng-repeat="aQrcode in qrCodeList">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img class="img-fluid " ng-src="{{aQrcode.base64QrImg}}">
+                        </div>
+                        <div class="col-sm-9">
+                            <a class="text-breakall text-primary" href="{{aQrcode.url}}"
+                               target="_blank">{{aQrcode.url}}</a>
+                            <p class="text-breakall font-italic text-muted">{{aQrcode.title}}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
         </div>
+
     </div>
 </div>
+
+<hr>
+<!--<div class="center-block">Powered by Bowen Liang.</div>-->
 
 <div id="qrcode" hidden>
 
