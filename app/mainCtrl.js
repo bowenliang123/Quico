@@ -180,11 +180,9 @@ angular.module('mainCtrl', [])
             }
 
             let newQueryStr = '';
-            for (let i = 0; i < $scope.currentParams.length; i++) {
-                let key = $scope.currentParams[i].key;
-                let value = $scope.currentParams[i].value;
-                newQueryStr = newQueryStr.concat(key, '=', value, '&');
-            }
+            $scope.currentParams.forEach(function (param) {
+                newQueryStr = newQueryStr.concat(param.key, '=', param.value, '&');
+            });
             newQueryStr = newQueryStr.slice(0, newQueryStr.length - 1)
 
 
