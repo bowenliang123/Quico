@@ -179,14 +179,14 @@ angular.module('mainCtrl', [])
                 return;
             }
 
+            //拼接 query 字符串
             let newQueryStr = '';
             $scope.currentParams.forEach(function (param) {
                 newQueryStr = newQueryStr.concat(param.key, '=', param.value, '&');
             });
             newQueryStr = newQueryStr.slice(0, newQueryStr.length - 1)
 
-
-            //拼接 query 字符串
+            //更新 query 字符串
             $scope.currentQuery = newQueryStr;
 
             //刷新 url 详情和二维码

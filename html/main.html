@@ -17,27 +17,15 @@
 
     <div class="row m-y-1">
 
+        <!--左栏-->
         <div class="col-sm-3">
-            <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-            <!--<img src="../img/icon.ico" alt="">-->
-            <!--</div>-->
-
-            <!--<div class="col-sm-9">-->
-            <!--<blockquote class="blockquote ">-->
-            <!--<p class="m-b-0">Quico 快码</p>-->
-            <!--<p class="m-y-0">次世代生产力二维码工具</cite></p>-->
-            <!--</blockquote>-->
-            <!--</div>-->
-            <!--</div>-->
-
             <div class="media m-y-2">
                 <a class="media-left" href="#">
                     <img class="media-object" src="../img/icon.ico" alt="Generic placeholder image">
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading">Quico 快码</h4>
-                    次世代生产力二维码工具
+                    <span class="lead">次世代生产力二维码工具</span>
                 </div>
             </div>
 
@@ -47,10 +35,10 @@
 
                 <li class="list-group-item" ng-repeat="aQrcode in qrCodeList" ng-click="onClickRecentUrls(aQrcode.url)">
                     <div class="row">
-                        <div class="col-sm-4 p-x-0">
+                        <div class="col-sm-3 p-x-0">
                             <img class="img-fluid" ng-src="{{aQrcode.base64QrImg}}">
                         </div>
-                        <div class="col-sm-8 p-r-0">
+                        <div class="col-sm-9 p-r-0">
                             <a class="text-breakall text-primary" href="{{aQrcode.url}}"
                                target="_blank">{{aQrcode.url}}</a>
                             <p class="text-breakall font-italic text-muted">{{aQrcode.title}}</p>
@@ -61,7 +49,8 @@
         </div>
 
 
-        <div class="col-sm-5 m-y-1">
+        <!--中栏-->
+        <div class="col-sm-6 m-y-1">
             <form>
                 <div class="form-group row">
                     <label for="texteraFullUrl" class="col-sm-2 form-control-label">Full URL</label>
@@ -104,15 +93,17 @@
 
                 <div class="form-group row" ng-repeat="param in currentParams">
                     <label for="inputParam{{$index}}" class="col-sm-2 form-control-label">Param</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm" id="inputParam{{$index}}"
-                               placeholder="key=value"
-                               ng-model="param.key"
-                               ng-change="onChangeParams()">
+                    <div class="col-sm-3 p-r-0">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm" id="inputParam{{$index}}"
+                                   placeholder="key=value"
+                                   ng-model="param.key"
+                                   ng-change="onChangeParams()">
+                            <div class="input-group-addon">=</div>
+                        </div>
                     </div>
 
-                    <!--<label for="inputParam{{$index}}value" class="col-sm-2 form-control-label">value</label>-->
-                    <div class="col-sm-6">
+                    <div class="col-sm-7 p-l-0">
                         <input type="text" class="form-control form-control-sm" id="inputParam{{$index}}value"
                                placeholder="key=value"
                                ng-model="param.value"
@@ -136,14 +127,15 @@
         </div>
 
 
-        <div class="col-sm-4">
+        <!--右栏-->
+        <div class="col-sm-3">
 
             <div class="row m-y-1">
-                <div class="col-sm-2"></div>
+                <div class="col-sm-1"></div>
                 <div class="col-sm-8">
                     <img class="img-fluid img-thumbnail" ng-src="{{currentCase.base64img}}">
                 </div>
-                <div class="col-sm-2"></div>
+                <div class="col-sm-1"></div>
             </div>
 
 
