@@ -200,10 +200,10 @@ function getQuicoBookmarks(callback) {
 
             //获取 Quico Bookmarks 下所有书签
             var quicoBookmarksRootNodeId = bookmarkTreeNodes[0].id;
-            chrome.bookmarks.getChildren(quicoBookmarksRootNodeId, function (results) {
+            chrome.bookmarks.getSubTree(quicoBookmarksRootNodeId, function (results) {
 
                 //cb
-                callback(results, quicoBookmarksRootNodeId);
+                callback(results[0], quicoBookmarksRootNodeId);
             });
         }
     });

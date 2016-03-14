@@ -37,8 +37,8 @@
                 </button>
                 <button class="list-group-item text-breakall"
                         ng-repeat="bookmark in bookmarks"
-                        ng-click="onClickRecentUrls(bookmark.url)">
-                    {{bookmark.url}}
+                        ng-click="onClickRecentUrls(bookmark)">
+                    <a ng-href="bookmark.url">{{bookmark}}</a>
                 </button>
             </div>
         </div>

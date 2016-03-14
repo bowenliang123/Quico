@@ -61,20 +61,6 @@ angular.module('mainCtrl', [])
                 $scope.currentParams = tmpParams;
             }
 
-            //$scope.currentCase.url = $scope.currentUrl;
-            //$scope.currentCase.base64img = displayQrcode($scope.currentUrl);
-
-            //解析地址结构
-            //$scope.parser = document.getElementById('hiddenA');
-            //$scope.parser.href = $scope.currentUrl;
-
-            //$scope.parser.protocol; // => "http:"
-            //$scope.parser.hostname; // => "example.com"
-            //$scope.parser.port;     // => "3000"
-            //$scope.parser.pathname; // => "/pathname/"
-            //$scope.parser.search;   // => "?search=test"
-            //$scope.parser.hash;     // => "#hash"
-            //$scope.parser.host;     // => "example.com:3000"
         }
 
         /**
@@ -121,9 +107,27 @@ angular.module('mainCtrl', [])
                 }
 
 
-                //消息 - updateTab
+                //消息 - getAllQuicoBookmarks
                 if (msg.action == 'getAllQuicoBookmarks') {
-                    $scope.bookmarks = msg.bookmarks;
+                    var quicoBookmarks = msg.bookmarks;
+
+
+                    function loopBookmarkTrees(bookmarkNode) {
+                        let hehe = [];
+                        if (bookmarkNode.children == undefined) {
+                            hehe.push(bookmarkNode.url);
+                        } else {
+                            bookmarkNode.children.forEach(function (bookmark) {
+                                console.log(bookmark);
+                                hehe = hehe.concat(loopBookmarkTrees(bookmark));
+                            });
+                        }
+
+                        return hehe;
+                    }
+
+                    $scope.bookmarks = loopBookmarkTrees(quicoBookmarks);
+                    console.log($scope.bookmarks);
                     $scope.bookmarksRootId = msg.bookmarksRootId;
                     $scope.$apply();
                 }
@@ -167,9 +171,9 @@ angular.module('mainCtrl', [])
 
 
         function getAllQuicoBookmarksFromBackground(port) {
-            //if (port == undefined) {
-            //    return;
-            //}
+            if (port == undefined) {
+                return;
+            }
 
             port.postMessage({action: 'getAllQuicoBookmarks'});
         }
