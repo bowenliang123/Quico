@@ -127,6 +127,12 @@ angular.module('mainCtrl', [])
                     $scope.bookmarksRootId = msg.bookmarksRootId;
                     $scope.$apply();
                 }
+
+                //消息 -  bookmarksUpdated 背景页通知书签有变更
+                if (msg.action == 'bookmarksUpdated') {
+                    //向背景页获取所有 Quico 标签
+                    getAllQuicoBookmarksFromBackground(port);
+                }
             });
             return port;
         }

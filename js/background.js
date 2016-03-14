@@ -3,82 +3,132 @@
 console.log('background.js');
 
 
+//变量
+
 //main 页面连接
 var portsToMain = [];
 
-//监听长时间连接
-chrome.runtime.onConnect.addListener(function (port) {
-    //console.log(port);
+//初始化
+init();
 
-    var latestTab = getLatestTab();
-    if (port.name == 'main') {
-        //发送 url 更新信息
-        port.postMessage({
-            action: 'updateTab',
-            tab: latestTab
-        });
+/**
+ * 初始化
+ */
+function init() {
+    //响应长时间链接和消息处理
+    handleRuntimeConnnection();
 
-        //加入到广播队列中
-        portsToMain.push(port);
-    }
+    //监听标签变化
+    listenTabChange();
 
-    //响应消息
-    port.onMessage.addListener(function (msg) {
+    //监听书签变化
+    listenBookmarksChange();
+}
 
-        console.log('onMessage:');
-        console.log(msg);
-
-        if (msg.action == 'getAllQuicoBookmarks') {
-
-            //获取所有 Quico 书签
-            getQuicoBookmarks(function (results,quicoBookmarksRootNodeId) {
-                port.postMessage({
-                    action: 'getAllQuicoBookmarks',
-                    bookmarks: results,
-                    bookmarksRootId: quicoBookmarksRootNodeId
-                });
-            });
-        }
-
-    });
-
-
-    //onDisconnect 响应连接断开
-    port.onDisconnect.addListener(function (msg) {
-        //标记连接断开
-        port.isDisconnected = true;
-    });
-});
-
-
-//监听标签变化
-//https://developer.chrome.com/extensions/tabs#event-onActivated
-chrome.tabs.onActivated.addListener(function (activeInfo) {
-    chrome.tabs.get(activeInfo.tabId, function (tab) {
-        //console.log(tab);
-
-        //忽略非页面链接
-        if (!tab.url.match(/^http/i)) {
-            return;
-        }
-
-
-        //更新 latestTab
-        saveLatestTab(tab);
+function handleRuntimeConnnection() {
+    //监听长时间连接
+    chrome.runtime.onConnect.addListener(function (port) {
+        //console.log(port);
 
         var latestTab = getLatestTab();
-
-        //广播更新
-        getAlivePortsToMain().forEach(function (port) {
-
+        if (port.name == 'main') {
             //发送 url 更新信息
             port.postMessage({
                 action: 'updateTab',
                 tab: latestTab
             });
+
+            //加入到广播队列中
+            portsToMain.push(port);
+        }
+
+        //响应消息
+        port.onMessage.addListener(function (msg) {
+
+            console.log('onMessage:');
+            console.log(msg);
+
+            if (msg.action == 'getAllQuicoBookmarks') {
+
+                //获取所有 Quico 书签
+                getQuicoBookmarks(function (results, quicoBookmarksRootNodeId) {
+                    port.postMessage({
+                        action: 'getAllQuicoBookmarks',
+                        bookmarks: results,
+                        bookmarksRootId: quicoBookmarksRootNodeId
+                    });
+                });
+            }
+
+        });
+
+
+        //onDisconnect 响应连接断开
+        port.onDisconnect.addListener(function (msg) {
+            //标记连接断开
+            port.isDisconnected = true;
         });
     });
-});
+}
+
+/**
+ * 监听标签变化
+ */
+function listenTabChange() {
+    //监听标签变化
+    //https://developer.chrome.com/extensions/tabs#event-onActivated
+    chrome.tabs.onActivated.addListener(function (activeInfo) {
+        chrome.tabs.get(activeInfo.tabId, function (tab) {
+            //console.log(tab);
+
+            //忽略非页面链接
+            if (!tab.url.match(/^http/i)) {
+                return;
+            }
+
+
+            //更新 latestTab
+            saveLatestTab(tab);
+
+            var latestTab = getLatestTab();
+
+            //广播更新
+            getAlivePortsToMain().forEach(function (port) {
+
+                //发送 url 更新信息
+                port.postMessage({
+                    action: 'updateTab',
+                    tab: latestTab
+                });
+            });
+        });
+    });
+}
+
+/**
+ * 监听 chrome 全局书签变化, 并通知 main
+ */
+function listenBookmarksChange() {
+    //通知 main 面板
+    function notifyMainPorts() {
+        //广播更新
+        getAlivePortsToMain().forEach(function (port) {
+            //发送 url 更新信息
+            port.postMessage({
+                action: 'bookmarksUpdated'
+            });
+        });
+    }
+
+    //监听 chrome 全局书签变化
+    chrome.bookmarks.onCreated.addListener(notifyMainPorts);
+    chrome.bookmarks.onRemoved.addListener(notifyMainPorts);
+    chrome.bookmarks.onChanged.addListener(notifyMainPorts);
+    chrome.bookmarks.onMoved.addListener(notifyMainPorts);
+    chrome.bookmarks.onImportBegan.addListener(notifyMainPorts);
+    chrome.bookmarks.onImportEnded.addListener(notifyMainPorts);
+}
+
 
 /**
  * 获取所有存活连接
