@@ -1,8 +1,13 @@
 {
-  "name": "Quico",
+  "name": "Quico 快码 次世代生产力二维码工具",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "The best QRCode tools designed for developers by Bowen Liang since 20160310",
+  "description": "Quico 快码 次世代生产力二维码工具",
+  "icons": {
+    "16": "img/icon_16.png",
+    "48": "img/icon_48.png",
+    "128": "img/icon_128.png"
+  },
   "permissions": [
     "tabs",
     "storage"
