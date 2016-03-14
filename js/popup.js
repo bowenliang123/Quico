@@ -8,12 +8,13 @@ console.log('popup.js');
 //变量
 var qrcode;
 
+var currentUrl;
+
 //获取当前窗口URL
 chrome.tabs.query({active: true, currentWindow: true}, function (tabArray) {
-    var currentTab = tabArray[0];
+    let currentTab = tabArray[0];
 
-    var currentUrl = currentTab.url;
-    var currentTitle = currentTab.title;
+    currentUrl = currentTab.url;
 
     //生成二维码显示到canvas
     displayQrcode(currentUrl);
@@ -40,6 +41,6 @@ mainBtn.addEventListener('click', function (event) {
 
     //用新标签打开主面板页
     chrome.tabs.create({
-        url: 'html/main.html'
+        url: 'html/main.html?url=' + currentUrl
     });
 });
