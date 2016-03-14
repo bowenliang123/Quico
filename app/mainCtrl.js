@@ -115,7 +115,7 @@ angular.module('mainCtrl', [])
                     function loopBookmarkTrees(bookmarkNode) {
                         let hehe = [];
                         if (bookmarkNode.children == undefined) {
-                            hehe.push(bookmarkNode.url);
+                            hehe.push({url: bookmarkNode.url, title: bookmarkNode.title});
                         } else {
                             bookmarkNode.children.forEach(function (bookmark) {
                                 console.log(bookmark);
@@ -127,7 +127,6 @@ angular.module('mainCtrl', [])
                     }
 
                     $scope.bookmarks = loopBookmarkTrees(quicoBookmarks);
-                    console.log($scope.bookmarks);
                     $scope.bookmarksRootId = msg.bookmarksRootId;
                     $scope.$apply();
                 }
@@ -229,4 +228,12 @@ angular.module('mainCtrl', [])
         $scope.openQuicoBookmarksInNewTab = function () {
             chrome.tabs.create({url: 'chrome://bookmarks/#' + $scope.bookmarksRootId});
         };
+
+        //鼠标点击 - 点击 clear 按钮
+        $scope.onClickClear=function(){
+            $scope.currentUrl='';
+            refreshQrcodeImage();
+
+            $scope.$apply();
+        }
     });
