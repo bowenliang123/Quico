@@ -22,6 +22,7 @@
   "dependencies": {
     "qrcode.js": "qrcode-js#*",
     "bootstrap": "v4.0.0-alpha.2",
-    "bootstrap-treeview": "^1.2.0"
+    "font-awesome": "fontawesome#^4.5.0",
+    "angular": "^1.5.0"
   }
 }

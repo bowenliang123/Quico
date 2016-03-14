@@ -230,10 +230,33 @@ angular.module('mainCtrl', [])
         };
 
         //鼠标点击 - 点击 clear 按钮
-        $scope.onClickClear=function(){
-            $scope.currentUrl='';
+        $scope.onClickClear = function () {
+            $scope.currentUrl = '';
             refreshQrcodeImage();
-
-            $scope.$apply();
         }
+
+
+        //鼠标点击 - 点击 clear 按钮
+        $scope.onClickDownloadBtn = function () {
+
+            //初始化链接
+            let downloadLink = document.createElement("a");
+
+            //用 base64 生成 url
+            downloadLink.href = $scope.currentCase.base64img.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+
+            //文件名
+            downloadLink.download = "QRcode.png";
+
+            //加入到文档中
+            document.body.appendChild(downloadLink);
+
+            //下载
+            downloadLink.click();
+
+            //清理
+            document.body.removeChild(downloadLink);
+        }
+
+
     });

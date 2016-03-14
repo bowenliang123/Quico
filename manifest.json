@@ -1,6 +1,6 @@
 {
   "name": "Quico 快码 次世代生产力二维码工具",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
   "description": "Just feeling QRcodes on the fly. 可能是最具生产力的二维码工具.",
   "icons": {

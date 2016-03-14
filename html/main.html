@@ -8,6 +8,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 
+    <!--fontawesome css-->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+
     <!--app css-->
     <link rel="stylesheet" href="../css/app.css">
 </head>
@@ -33,6 +36,7 @@
             <div class="list-group">
                 <button class="list-group-item text-breakall list-group-item-success"
                         ng-click="openQuicoBookmarksInNewTab()">
+                    <i class="fa fa-bookmark"></i>
                     Quico Bookmarks ( chrome://bookmarks/#{{bookmarksRootId}} )
                 </button>
                 <button class="list-group-item text-breakall"
@@ -136,21 +140,26 @@
 
             <div class="row m-a-1">
                 <div class="btn-group center-block" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-secondary col-sm-6"
-                        ng-click="onClickClear()">
+                    <button type="button" class="btn  btn-warning col-sm-6"
+                            ng-click="onClickClear()">
+                        <i class="fa fa-trash"></i>
                         Clear
                     </button>
-                    <a type="button" class="btn btn-secondary col-sm-6"
-                       href="{{currentCase.base64img}}" target="_blank">
-                        Open Image In New Tab
-                    </a>
+                    <button type="button" class="btn  btn-primary col-sm-6"
+                            ng-click="onClickDownloadBtn()">
+                        <i class="fa fa-arrow-down"></i>
+                        Download
+                    </button>
                     <!--<button type="button" class="btn btn-secondary col-sm-4">Right</button>-->
                 </div>
             </div>
 
 
             <ul class="list-group">
-                <li class="list-group-item list-group-item-info">Most recent URLs</li>
+                <li class="list-group-item list-group-item-info">
+                    <i class="fa fa-rocket"></i>
+                    Most recent URLs
+                </li>
 
                 <button type="button" class="list-group-item text-breakall"
                         ng-repeat="aQrcode in qrCodeList"
