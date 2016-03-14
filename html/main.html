@@ -18,10 +18,29 @@
     <div class="row m-y-1">
 
         <div class="col-sm-3">
-            <blockquote class="blockquote ">
-                <p class="m-b-0">Quico 快码</p>
-                <p class="m-y-0">次世代生产力二维码工具</cite></p>
-            </blockquote>
+            <!--<div class="row">-->
+            <!--<div class="col-sm-3">-->
+            <!--<img src="../img/icon.ico" alt="">-->
+            <!--</div>-->
+
+            <!--<div class="col-sm-9">-->
+            <!--<blockquote class="blockquote ">-->
+            <!--<p class="m-b-0">Quico 快码</p>-->
+            <!--<p class="m-y-0">次世代生产力二维码工具</cite></p>-->
+            <!--</blockquote>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <div class="media m-y-2">
+                <a class="media-left" href="#">
+                    <img class="media-object" src="../img/icon.ico" alt="Generic placeholder image">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">Quico 快码</h4>
+                    次世代生产力二维码工具
+                </div>
+            </div>
+
 
             <ul class="list-group">
                 <li class="list-group-item list-group-item-info">Most recent URLs</li>
@@ -71,7 +90,6 @@
                     </div>
                 </div>
 
-
                 <div class="form-group row">
                     <label for="inputQuery" class="col-sm-2 form-control-label">Query</label>
                     <div class="col-sm-10">
@@ -81,6 +99,24 @@
                                    placeholder="key=value"
                                    ng-model="currentQuery" ng-change="onChangeUrlDetails()">
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-group row" ng-repeat="param in currentParams">
+                    <label for="inputParam{{$index}}" class="col-sm-2 form-control-label">Param</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="inputParam{{$index}}"
+                               placeholder="key=value"
+                               ng-model="param.key"
+                               ng-change="onChangeParams()">
+                    </div>
+
+                    <!--<label for="inputParam{{$index}}value" class="col-sm-2 form-control-label">value</label>-->
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-sm" id="inputParam{{$index}}value"
+                               placeholder="key=value"
+                               ng-model="param.value"
+                               ng-change="onChangeParams($index)">
                     </div>
                 </div>
 
@@ -111,12 +147,11 @@
             </div>
 
 
-
-
         </div>
 
     </div>
 </div>
+
 
 <hr>
 

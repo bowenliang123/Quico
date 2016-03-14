@@ -19,22 +19,37 @@ angular.module('mainCtrl', [])
             base64img: ''
         };
 
+        var globalParamIndex = undefined;
+
         let urlReg = /^(https?:\/\/[\w\d\-.]+)(\/?$|[\w\d\/.]+)\??([\w\d\-=%&]*)\#?(.*)/i;
 
 
-        var refreshQrcodeImage = function () {
+        var refreshQrcodeImage = function (isRefreshUrlDeatils) {
             $scope.currentCase.base64img = displayQrcode($scope.currentUrl);
 
-            let mathedArr = urlReg.exec($scope.currentUrl);
-            if (mathedArr == null) {
-                //忽略非网址结构文本
-                return;
+            if (isRefreshUrlDeatils != false) {
+                let mathedArr = urlReg.exec($scope.currentUrl);
+                if (mathedArr == null) {
+                    //忽略非网址结构文本
+                    return;
+                }
+
+                $scope.currentBase = mathedArr[1];
+                $scope.currentPath = mathedArr[2];
+                $scope.currentQuery = mathedArr[3];
+                $scope.currentHash = mathedArr[4];
+
+                let arr = $scope.currentQuery.split('&');
+                let haha = [];
+                for (let i = 0; i < arr.length; i++) {
+                    let key = arr[i].split('=')[0];
+                    let value = arr[i].split('=')[1];
+                    haha.push({key: key, value: value});
+                }
+
+                $scope.currentParams = haha
             }
 
-            $scope.currentBase = mathedArr[1];
-            $scope.currentPath = mathedArr[2];
-            $scope.currentQuery = mathedArr[3];
-            $scope.currentHash = mathedArr[4];
             //$scope.currentCase.url = $scope.currentUrl;
             //$scope.currentCase.base64img = displayQrcode($scope.currentUrl);
 
@@ -136,7 +151,7 @@ angular.module('mainCtrl', [])
         //事件注册
         $scope.onChangeUrlTexteara = refreshQrcodeImage;
 
-        $scope.onChangeUrlDetails = function () {
+        $scope.onChangeUrlDetails = function (isRefreshUrlDeatils) {
 
             let newUrl = [
                 $scope.currentBase,
@@ -147,9 +162,7 @@ angular.module('mainCtrl', [])
 
             $scope.currentUrl = newUrl;
 
-            refreshQrcodeImage();
-
-
+            refreshQrcodeImage(isRefreshUrlDeatils);
         }
 
 
@@ -159,4 +172,26 @@ angular.module('mainCtrl', [])
         }
 
 
+        $scope.onChangeParams = function (index) {
+
+            //忽略字符串为空的时候
+            if ($scope.currentParams == undefined || $scope.currentParams.length == 0) {
+                return;
+            }
+
+            let newQueryStr = '';
+            for (let i = 0; i < $scope.currentParams.length; i++) {
+                let key = $scope.currentParams[i].key;
+                let value = $scope.currentParams[i].value;
+                newQueryStr = newQueryStr.concat(key, '=', value, '&');
+            }
+            newQueryStr = newQueryStr.slice(0, newQueryStr.length - 1)
+
+
+            //拼接 query 字符串
+            $scope.currentQuery = newQueryStr;
+
+            //刷新 url 详情和二维码
+            $scope.onChangeUrlDetails(false);
+        }
     });
