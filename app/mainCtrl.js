@@ -7,10 +7,6 @@ angular.module('mainCtrl', [])
         $scope.latestTab = undefined;
         $scope.currentUrl = '';
         $scope.parser = undefined;
-
-        //$scope.parsedUrl = {
-        //}
-
         $scope.currentCase = {
             fullUrl: '',
             base: '',
@@ -19,12 +15,25 @@ angular.module('mainCtrl', [])
             base64img: ''
         };
 
-        var globalParamIndex = undefined;
 
-        let urlReg = /^(https?:\/\/[\w\d\-.]+)(\/?$|[\w\d\/.]+)\??([\w\d\-=%&]*)\#?(.*)/i;
+        let urlReg = /^(https?:\/\/[\w\d\-.]+)(\/?$|[\w\d\/\-.]+)\??([\w\d\-=%&]*)\#?(.*)/i;
 
 
-        var refreshQrcodeImage = function (isRefreshUrlDeatils) {
+        var qrcode;
+        var port;
+
+        init();
+
+        function init() {
+            //初始化与背景页的链接
+            initConnctionToBackground(port);
+
+            //刷新从后台获取的页面
+            refreshQrcodeImage();
+        }
+
+
+        function refreshQrcodeImage(isRefreshUrlDeatils) {
             $scope.currentCase.base64img = displayQrcode($scope.currentUrl);
 
             if (isRefreshUrlDeatils != false) {
@@ -34,20 +43,22 @@ angular.module('mainCtrl', [])
                     return;
                 }
 
+                //组装
                 $scope.currentBase = mathedArr[1];
                 $scope.currentPath = mathedArr[2];
                 $scope.currentQuery = mathedArr[3];
                 $scope.currentHash = mathedArr[4];
 
+
+                //拆解 param 字符串
                 let arr = $scope.currentQuery.split('&');
-                let haha = [];
+                let tmpParams = [];
                 for (let i = 0; i < arr.length; i++) {
                     let key = arr[i].split('=')[0];
                     let value = arr[i].split('=')[1];
-                    haha.push({key: key, value: value});
+                    tmpParams.push({key: key, value: value});
                 }
-
-                $scope.currentParams = haha
+                $scope.currentParams = tmpParams;
             }
 
             //$scope.currentCase.url = $scope.currentUrl;
@@ -64,18 +75,7 @@ angular.module('mainCtrl', [])
             //$scope.parser.search;   // => "?search=test"
             //$scope.parser.hash;     // => "#hash"
             //$scope.parser.host;     // => "example.com:3000"
-        };
-
-        var qrcode;
-
-        var port;
-
-
-        //初始化与背景页的链接
-        initConnctionToBackground(port);
-
-        //刷新从后台获取的页面
-        refreshQrcodeImage();
+        }
 
         /**
          * 向背景页建立连接, 以及加上事件响应
@@ -85,6 +85,10 @@ angular.module('mainCtrl', [])
             port = chrome.runtime.connect({name: 'main'});
 
             console.info('connected to background.');
+
+            //向背景页获取所有 Quico 标签
+            getAllQuicoBookmarksFromBackground(port);
+
 
             //响应断开, 自动重连
             port.onDisconnect.addListener(function () {
@@ -97,8 +101,10 @@ angular.module('mainCtrl', [])
             //响应消息
             port.onMessage.addListener(function (msg) {
 
-                console.log('onMessage', msg.action, msg.tab.url);
+                console.log('onMessage');
+                console.log(msg);
 
+                //消息 - updateTab
                 if (msg.action == 'updateTab') {
 
                     let tab = msg.tab;
@@ -112,8 +118,14 @@ angular.module('mainCtrl', [])
                     let base64QrImg = displayQrcode(tab.url);
                     $scope.qrCodeList.unshift({url: tab.url, title: tab.title, base64QrImg: base64QrImg});
                     $scope.$apply();
-                    //displayMetaInfo(tab.title, tab.url);
+                }
 
+
+                //消息 - updateTab
+                if (msg.action == 'getAllQuicoBookmarks') {
+                    $scope.bookmarks = msg.bookmarks;
+                    $scope.bookmarksRootId = msg.bookmarksRootId;
+                    $scope.$apply();
                 }
             });
             return port;
@@ -148,6 +160,15 @@ angular.module('mainCtrl', [])
         }
 
 
+        function getAllQuicoBookmarksFromBackground(port) {
+            //if (port == undefined) {
+            //    return;
+            //}
+
+            port.postMessage({action: 'getAllQuicoBookmarks'});
+        }
+
+
         //事件注册
         $scope.onChangeUrlTexteara = refreshQrcodeImage;
 
@@ -163,13 +184,13 @@ angular.module('mainCtrl', [])
             $scope.currentUrl = newUrl;
 
             refreshQrcodeImage(isRefreshUrlDeatils);
-        }
+        };
 
 
         $scope.onClickRecentUrls = function (url) {
             $scope.currentUrl = url;
             refreshQrcodeImage();
-        }
+        };
 
 
         $scope.onChangeParams = function (index) {
@@ -191,5 +212,11 @@ angular.module('mainCtrl', [])
 
             //刷新 url 详情和二维码
             $scope.onChangeUrlDetails(false);
-        }
+        };
+
+
+        //鼠标点击 - 点击 quico 书签标题
+        $scope.openQuicoBookmarksInNewTab = function () {
+            chrome.tabs.create({url: 'chrome://bookmarks/#' + $scope.bookmarksRootId});
+        };
     });

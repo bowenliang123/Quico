@@ -10,7 +10,8 @@
   },
   "permissions": [
     "tabs",
-    "storage"
+    "storage",
+    "bookmarks"
   ],
   "options_page": "html/options.html",
   "background": {

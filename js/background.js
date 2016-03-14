@@ -22,6 +22,27 @@ chrome.runtime.onConnect.addListener(function (port) {
         portsToMain.push(port);
     }
 
+    //响应消息
+    port.onMessage.addListener(function (msg) {
+
+        console.log('onMessage:');
+        console.log(msg);
+
+        if (msg.action == 'getAllQuicoBookmarks') {
+
+            //获取所有 Quico 书签
+            getQuicoBookmarks(function (results,quicoBookmarksRootNodeId) {
+                port.postMessage({
+                    action: 'getAllQuicoBookmarks',
+                    bookmarks: results,
+                    bookmarksRootId: quicoBookmarksRootNodeId
+                });
+            });
+        }
+
+    });
+
+
     //onDisconnect 响应连接断开
     port.onDisconnect.addListener(function (msg) {
         //标记连接断开
@@ -43,7 +64,6 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
 
 
         //更新 latestTab
-
         saveLatestTab(tab);
 
         var latestTab = getLatestTab();
@@ -80,17 +100,25 @@ function getAlivePortsToMain() {
 }
 
 
+/**
+ * 从 localstorage 读取最新 tab
+ * @returns {undefined}
+ */
 function getLatestTab() {
     //读取 localstorage
     let latestTabStr = window.localStorage.getItem('latestTab');
     if (latestTabStr == undefined) {
         return undefined;
     }
-    
+
     //反序列化
     return JSON.parse(latestTabStr);
 }
 
+/**
+ * 存储最新 tab 到 localstorage
+ * @param tab
+ */
 function saveLatestTab(tab) {
     if (tab == undefined) {
         return;
@@ -98,4 +126,35 @@ function saveLatestTab(tab) {
 
     //序列化 tab 存入 localstorage
     window.localStorage.setItem('latestTab', JSON.stringify(tab));
+}
+
+
+/**
+ * 获取 Quico Bookmarks 下所有书签
+ * @param callback
+ */
+function getQuicoBookmarks(callback) {
+    //查询标签
+    chrome.bookmarks.search('Quico Bookmarks', function (bookmarkTreeNodes) {
+
+        //若未找到则创建
+        if (bookmarkTreeNodes == undefined || bookmarkTreeNodes.length == 0) {
+            //创建, 模拟在'其他书签'(other bookmarks)文件夹中创建
+            chrome.bookmarks.create({
+                title: 'Quico Bookmarks'
+            }, function (result) {
+                //创建后再次尝试获取 Quico Bookmarks 下所有书签
+                getQuicoBookmarks(callback);
+            })
+        } else {
+
+            //获取 Quico Bookmarks 下所有书签
+            var quicoBookmarksRootNodeId = bookmarkTreeNodes[0].id;
+            chrome.bookmarks.getChildren(quicoBookmarksRootNodeId, function (results) {
+
+                //cb
+                callback(results, quicoBookmarksRootNodeId);
+            });
+        }
+    });
 }

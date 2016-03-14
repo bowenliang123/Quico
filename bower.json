@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "qrcode.js": "qrcode-js#*",
-    "bootstrap": "v4.0.0-alpha.2"
+    "bootstrap": "v4.0.0-alpha.2",
+    "bootstrap-treeview": "^1.2.0"
   }
 }

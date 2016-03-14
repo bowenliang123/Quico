@@ -26,10 +26,21 @@
                 <div class="media-body">
                     <h4 class="media-heading">Quico 快码</h4>
                     <span class="lead">次世代生产力二维码工具</span>
+                    <p>Just feeling codes on the fly.</p>
                 </div>
             </div>
 
-
+            <div class="list-group">
+                <button class="list-group-item text-breakall list-group-item-success"
+                        ng-click="openQuicoBookmarksInNewTab()">
+                    Quico Bookmarks
+                </button>
+                <button class="list-group-item text-breakall"
+                        ng-repeat="bookmark in bookmarks"
+                        ng-click="onClickRecentUrls(bookmark.url)">
+                    {{bookmark.url}}
+                </button>
+            </div>
         </div>
 
 
@@ -89,7 +100,7 @@
 
                     <div class="col-sm-7 p-l-0">
                         <input type="text" class="form-control form-control-sm" id="inputParam{{$index}}value"
-                               placeholder="key"
+                               placeholder="value"
                                ng-model="param.value"
                                ng-change="onChangeParams($index)">
                     </div>
@@ -126,7 +137,9 @@
             <ul class="list-group">
                 <li class="list-group-item list-group-item-info">Most recent URLs</li>
 
-                <li class="list-group-item" ng-repeat="aQrcode in qrCodeList" ng-click="onClickRecentUrls(aQrcode.url)">
+                <button type="button" class="list-group-item text-breakall"
+                        ng-repeat="aQrcode in qrCodeList"
+                        ng-click="onClickRecentUrls(aQrcode.url)">
                     <div class="row">
                         <div class="col-sm-3 p-x-0">
                             <img class="img-fluid" ng-src="{{aQrcode.base64QrImg}}">
@@ -137,7 +150,7 @@
                             <p class="text-breakall font-italic text-muted">{{aQrcode.title}}</p>
                         </div>
                     </div>
-                </li>
+                </button>
             </ul>
 
         </div>
