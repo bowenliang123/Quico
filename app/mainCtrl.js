@@ -8,6 +8,7 @@ angular.module('mainCtrl', [])
         $scope.qrCodeList = [];
         $scope.latestTab = undefined;
         $scope.currentUrl = '';
+        $scope.parser = undefined;
         $scope.currentCase = {
             fullUrl: '',
             base: '',
@@ -51,39 +52,30 @@ angular.module('mainCtrl', [])
             $scope.currentCase.base64img = displayQrcode($scope.currentUrl);
 
             if (isRefreshUrlDeatils != false) {
+                let aNode = document.createElement('a');
+                aNode.style.display = 'none';
+                document.body.appendChild(aNode);
+                aNode.href = $scope.currentUrl;
 
-                if ($scope.currentUrl == '') {
-                    $scope.currentBase = '';
-                    $scope.currentPath = '';
-                    $scope.currentQuery = '';
-                    $scope.currentHash = '';
-                } else {
-                    //创建隐藏隐藏a元素用于解析URL
-                    let aNode = document.createElement('a');
-                    aNode.style.display = 'none';
-                    document.body.appendChild(aNode);
-                    aNode.href = $scope.currentUrl;
+                $scope.currentBase = aNode.protocol.concat('//', aNode.host);
+                $scope.currentPath = aNode.pathname.concat();
+                $scope.currentQuery = aNode.search.slice(1, aNode.search.length).concat();
+                $scope.currentHash = aNode.hash.slice(1, aNode.hash.length).concat();
 
-                    $scope.currentBase = aNode.protocol.concat('//', aNode.host);
-                    $scope.currentPath = aNode.pathname.concat();
-                    $scope.currentQuery = aNode.search.slice(1, aNode.search.length).concat();
-                    $scope.currentHash = aNode.hash.slice(1, aNode.hash.length).concat();
+                //拆解 param 字符串
+                let keyValueArr = $scope.currentQuery.split('&');
+                let tmpParams = [];
+                for (let i = 0; i < keyValueArr.length; i++) {
+                    let pair = keyValueArr[i].split('=');
+                    let key = pair[0];
+                    let value = pair[1];
+                    tmpParams.push({key: key, value: value});
+                }
+                $scope.currentParams = tmpParams;
 
-                    //拆解 param 字符串
-                    let keyValueArr = $scope.currentQuery.split('&');
-                    let tmpParams = [];
-                    for (let i = 0; i < keyValueArr.length; i++) {
-                        let pair = keyValueArr[i].split('=');
-                        let key = pair[0];
-                        let value = pair[1];
-                        tmpParams.push({key: key, value: value});
-                    }
-                    $scope.currentParams = tmpParams;
-
-                    //cleanup
-                    if (aNode != undefined) {
-                        document.body.removeChild(aNode);
-                    }
+                //cleanup
+                if (aNode != undefined) {
+                    document.body.removeChild(aNode);
                 }
             }
         }
