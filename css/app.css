@@ -12,3 +12,28 @@ textarea {
 .text-breakall {
     word-break: break-all;
 }
+
+.bookmarks {
+    margin-top: 10px;
+}
+
+.bookmark {
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px solid lightblue;
+    border-radius: 10px;
+}
+
+.bookmark .title{
+    font-size: 14px;
+}
+
+.bookmark .url{
+    font-size: 12px;
+}
+
+.bookmark:hover {
+    cursor: pointer;
+    background: grey;
+    color: white;
+}

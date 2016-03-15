@@ -33,19 +33,22 @@
                 </div>
             </div>
 
-            <div class="list-group">
-                <button class="list-group-item text-breakall list-group-item-success"
+            <div class="m-t-2">
+                <button class="btn btn-success btn-block text-breakall"
                         ng-click="openQuicoBookmarksInNewTab()">
                     <i class="fa fa-bookmark"></i>
-                    Quico Bookmarks ( chrome://bookmarks/#{{bookmarksRootId}} )
-                </button>
-                <button class="list-group-item text-breakall"
-                        ng-repeat="bookmark in bookmarks"
-                        ng-click="onClickRecentUrls(bookmark.url)">
-                    <a ng-href="bookmark.url">{{bookmark.url}}</a>
-                    <p>{{bookmark.title}}</p>
+                    Bookmarks (chrome://bookmarks/#{{bookmarksRootId}})
                 </button>
             </div>
+
+            <div class="bookmarks">
+                <div ng-repeat="bookmark in bookmarks" ng-click="onClickRecentUrls(bookmark.url)"
+                     class="bookmark">
+                    <div class="title text-breakall">{{bookmark.title}}</div>
+                    <div class="url text-breakall">{{bookmark.url}}</div>
+                </div>
+            </div>
+
         </div>
 
 
