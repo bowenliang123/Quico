@@ -19,7 +19,7 @@ angular.module('mainCtrl', [])
         };
 
 
-        let urlReg = /^(https?:\/\/[\w\d\-.]+)(\/?$|[\w\d\/\-.]+)\??([\w\d\-=%&]*)\#?(.*)/i;
+        let urlReg = /^(https?:\/\/[\w\d\-:.]+)(\/?$|[\w\d\/\-%.]+)\??([\w\d\-=%&]*)\#?(.*)/i;
 
 
         var qrcode;
