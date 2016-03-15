@@ -56,30 +56,32 @@ angular.module('mainCtrl', [])
             $scope.currentCase.base64img = displayQrcode($scope.currentUrl);
 
             if (isRefreshUrlDeatils != false) {
-                let mathedArr = urlReg.exec($scope.currentUrl);
-                if (mathedArr == null) {
-                    //忽略非网址结构文本
-                    return;
-                }
+                let aNode = document.createElement('a');
+                aNode.style.display = 'none';
+                document.body.appendChild(aNode);
+                aNode.href = $scope.currentUrl;
 
-                //组装
-                $scope.currentBase = mathedArr[1];
-                $scope.currentPath = mathedArr[2];
-                $scope.currentQuery = mathedArr[3];
-                $scope.currentHash = mathedArr[4];
-
+                $scope.currentBase = aNode.protocol.concat('//', aNode.host);
+                $scope.currentPath = aNode.pathname.concat();
+                $scope.currentQuery = aNode.search.slice(1, aNode.search.length).concat();
+                $scope.currentHash = aNode.hash.slice(1, aNode.hash.length).concat();
 
                 //拆解 param 字符串
-                let arr = $scope.currentQuery.split('&');
+                let keyValueArr = $scope.currentQuery.split('&');
                 let tmpParams = [];
-                for (let i = 0; i < arr.length; i++) {
-                    let key = arr[i].split('=')[0];
-                    let value = arr[i].split('=')[1];
+                for (let i = 0; i < keyValueArr.length; i++) {
+                    let pair = keyValueArr[i].split('=');
+                    let key = pair[0];
+                    let value = pair[1];
                     tmpParams.push({key: key, value: value});
                 }
                 $scope.currentParams = tmpParams;
-            }
 
+                //cleanup
+                if (aNode != undefined) {
+                    document.body.removeChild(aNode);
+                }
+            }
         }
 
         /**
@@ -143,7 +145,7 @@ angular.module('mainCtrl', [])
                         }
 
                         return hehe;
-                    }
+                    };
 
                     $scope.bookmarks = loopBookmarkTrees(quicoBookmarks);
                     $scope.bookmarksRootId = msg.bookmarksRootId;
