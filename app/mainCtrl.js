@@ -38,13 +38,14 @@ angular.module('mainCtrl', [])
          * 从 GET 参数中获取传入的 url
          */
         function getInputUrl() {
-            var inputUrl = getURLParameter('url');
-            if (inputUrl == undefined) {
+            let inputUrl = getURLParameter('url');
+            console.log('url from input query string' + $scope.currentUrl);
+            
+            if (inputUrl == undefined || !inputUrl.startsWith('http')) {
                 return;
             }
 
             $scope.currentUrl = inputUrl;
-            console.log('url from input query string' + $scope.currentUrl);
         }
 
 
@@ -136,7 +137,7 @@ angular.module('mainCtrl', [])
 
                 //消息 - getAllQuicoBookmarks
                 if (msg.action == 'getAllQuicoBookmarks') {
-                    var quicoBookmarks = msg.bookmarks;
+                    let quicoBookmarks = msg.bookmarks;
 
 
                     let loopBookmarkTrees = function (bookmarkNode) {

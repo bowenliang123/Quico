@@ -6,7 +6,6 @@
 console.log('popup.js');
 
 //变量
-
 var qrcodeElement;
 var currentUrl; //当前页面 URL
 
@@ -45,7 +44,7 @@ qrcodeDiv.addEventListener('click', function (event) {
 
 
 //按钮事件 - 主页面按钮
-var mainBtn = document.getElementById("btn-main");
+let mainBtn = document.getElementById("btn-main");
 mainBtn.addEventListener('click', function (event) {
     event.preventDefault();
 
@@ -57,7 +56,7 @@ mainBtn.addEventListener('click', function (event) {
 
 
 //按钮事件 - 点击下载按钮
-var downloadBtn = document.getElementById("btn-download");
+let downloadBtn = document.getElementById("btn-download");
 downloadBtn.addEventListener('click', function (event) {
     event.preventDefault();
 

@@ -30,7 +30,7 @@ function handleRuntimeConnnection() {
     chrome.runtime.onConnect.addListener(function (port) {
         //console.log(port);
 
-        var latestTab = getLatestTab();
+        let latestTab = getLatestTab();
         if (port.name == 'main') {
             //发送 url 更新信息
             port.postMessage({
@@ -90,7 +90,7 @@ function listenTabChange() {
             //更新 latestTab
             saveLatestTab(tab);
 
-            var latestTab = getLatestTab();
+            let latestTab = getLatestTab();
 
             //广播更新
             getAlivePortsToMain().forEach(function (port) {
@@ -199,7 +199,7 @@ function getQuicoBookmarks(callback) {
         } else {
 
             //获取 Quico Bookmarks 下所有书签
-            var quicoBookmarksRootNodeId = bookmarkTreeNodes[0].id;
+            let quicoBookmarksRootNodeId = bookmarkTreeNodes[0].id;
             chrome.bookmarks.getSubTree(quicoBookmarksRootNodeId, function (results) {
 
                 //cb
