@@ -22,7 +22,7 @@
 
         <!--左栏-->
         <div class="col-sm-3">
-            <div class="media m-y-2 ">
+            <div class="media m-t-2">
                 <a class="media-left" href="#">
                     <img class="media-object" src="../img/icon.ico" alt="Generic placeholder image">
                 </a>
@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <div class="m-t-1">
+            <div>
                 <button class="btn btn-success btn-block text-breakall"
                         ng-click="openQuicoBookmarksInNewTab()">
                     <i class="fa fa-bookmark"></i>
@@ -56,8 +56,8 @@
         <div class="col-sm-6 m-y-1">
             <form>
                 <div class="form-group row">
-                    <label for="texteraFullUrl" class="col-sm-2 form-control-label">Full URL</label>
-                    <div class="col-sm-10">
+                    <label for="texteraFullUrl" class="col-sm-1 form-control-label">URL</label>
+                    <div class="col-sm-11">
                         <textarea id="texteraFullUrl" class="form-control"
                                   ng-model="currentUrl" ng-change="onChangeUrlTexteara()"
                                   style="word-break: break-all"
@@ -66,8 +66,8 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputDomain" class="col-sm-2 form-control-label">Base</label>
-                    <div class="col-sm-10">
+                    <label for="inputDomain" class="col-sm-1 form-control-label">Base</label>
+                    <div class="col-sm-11">
                         <input type="text" class="form-control form-control-sm" id="inputDomain"
                                placeholder="http://domain.com"
                                ng-model="currentBase" ng-change="onChangeUrlDetails()">
@@ -75,16 +75,16 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputPath" class="col-sm-2 form-control-label">Path</label>
-                    <div class="col-sm-10">
+                    <label for="inputPath" class="col-sm-1 form-control-label">Path</label>
+                    <div class="col-sm-11">
                         <input type="text" class="form-control form-control-sm" id="inputPath" placeholder="/path"
                                ng-model="currentPath" ng-change="onChangeUrlDetails()">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputQuery" class="col-sm-2 form-control-label">Query</label>
-                    <div class="col-sm-10">
+                    <label for="inputQuery" class="col-sm-1 form-control-label">Query</label>
+                    <div class="col-sm-11">
                         <div class="input-group">
                             <div class="input-group-addon">?</div>
                             <input type="text" class="form-control form-control-sm" id="inputQuery"
@@ -95,7 +95,7 @@
                 </div>
 
                 <div class="form-group row" ng-repeat="param in currentParams">
-                    <label for="inputParam{{$index}}" class="col-sm-2 form-control-label">Param</label>
+                    <label for="inputParam{{$index}}" class="col-sm-1 form-control-label">Param</label>
                     <div class="col-sm-3 p-r-0">
                         <div class="input-group">
                             <input type="text" class="form-control form-control-sm" id="inputParam{{$index}}"
@@ -115,8 +115,8 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputHash" class="col-sm-2 form-control-label">Hash</label>
-                    <div class="col-sm-10">
+                    <label for="inputHash" class="col-sm-1 form-control-label">Hash</label>
+                    <div class="col-sm-11">
                         <div class="input-group">
                             <div class="input-group-addon">#</div>
                             <input type="text" class="form-control form-control-sm" id="inputHash"
@@ -132,7 +132,6 @@
 
         <!--右栏-->
         <div class="col-sm-3">
-
             <div class="row m-y-1">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-8">

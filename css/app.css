@@ -14,14 +14,13 @@ textarea {
 }
 
 .bookmarks {
-    margin-top: 5px;
+    margin-top: 8px;
 }
 
 .bookmark {
-    padding: 2px 3px 2px 5px;
-    margin: 5px 0;
-    border: 1px solid lightblue;
-    border-radius: 5px;
+    padding: 2px 3px;
+    margin: 3px 0;
+    border-bottom: 1px solid lightgrey;
 }
 
 .bookmark .title {
@@ -36,6 +35,5 @@ textarea {
 
 .bookmark:hover {
     cursor: pointer;
-    background: grey;
-    color: white;
+    background: lightgrey;
 }
