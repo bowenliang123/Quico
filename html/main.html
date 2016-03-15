@@ -22,6 +22,7 @@
 
         <!--左栏-->
         <div class="col-sm-3">
+            <!--Icon and slogan-->
             <div class="media m-t-2">
                 <a class="media-left" href="#">
                     <img class="media-object" src="../img/icon.ico" alt="Generic placeholder image">
@@ -29,16 +30,20 @@
                 <div class="media-body">
                     <h3 class="media-heading">Quico 快码</h3>
                     <p class="lead">次世代生产力二维码工具</p>
-                    <p>Just feeling QRcodes on the fly.</p>
                 </div>
             </div>
 
-            <div>
-                <button class="btn btn-success btn-block text-breakall"
-                        ng-click="openQuicoBookmarksInNewTab()">
-                    <i class="fa fa-bookmark"></i>
-                    Bookmarks (chrome://bookmarks/#{{bookmarksRootId}})
-                </button>
+            <div class="m-t-1">
+                <div class="btn btn-sm btn-success btn-block text-breakall"
+                     ng-click="openQuicoBookmarksInNewTab()">
+                    <div>
+                        <i class="fa fa-bookmark"></i>
+                        Quico Bookmarks
+                    </div>
+                    <div>
+                        (chrome://bookmarks/#{{bookmarksRootId}})
+                    </div>
+                </div>
             </div>
 
             <div class="bookmarks">
@@ -106,7 +111,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-7 p-l-0">
+                    <div class="col-sm-8 p-l-0">
                         <input type="text" class="form-control form-control-sm" id="inputParam{{$index}}value"
                                placeholder="value"
                                ng-model="param.value"
@@ -132,27 +137,29 @@
 
         <!--右栏-->
         <div class="col-sm-3">
-            <div class="row m-y-1">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-8">
-                    <img class="img-fluid img-thumbnail" ng-src="{{currentCase.base64img}}">
-                </div>
-                <div class="col-sm-1"></div>
+            <!--主二维码显示面板-->
+            <div class="row m-y-1 qrImgContainer">
+                        <img class=" img-thumbnail" ng-src="{{currentCase.base64img}}">
             </div>
 
-            <div class="row m-a-1">
-                <div class="btn-group center-block" role="group" aria-label="Basic example">
-                    <button type="button" class="btn  btn-warning col-sm-6"
+            <!--快捷按钮-->
+            <div class="quickButtonsContainer">
+                <div class="quickButton">
+                    <button type="button" class="btn btn-sm btn-warning  btn-block"
                             ng-click="onClickClear()">
-                        <i class="fa fa-trash"></i>
+                        <i class="fa fa-times"></i>
                         Clear
                     </button>
-                    <button type="button" class="btn  btn-primary col-sm-6"
+                </div>
+
+                <div class="quickButton">
+                    <button type="button" class="btn btn-sm btn-primary btn-block"
                             ng-click="onClickDownloadBtn()">
                         <i class="fa fa-arrow-down"></i>
                         Download
                     </button>
                 </div>
+
             </div>
 
 
@@ -165,21 +172,20 @@
                 </div>
 
                 <!--recentUrl List-->
-                <div class="recentUrl  text-breakall"
-                     ng-repeat="aQrcode in qrCodeList"
-                     ng-click="onClickRecentUrls(aQrcode.url)">
+                <div class="recentUrl text-breakall"
+                     ng-repeat="aQrcode in qrCodeList" ng-click="onClickRecentUrls(aQrcode.url)">
 
-                        <div class="qrImg">
-                            <img class="" ng-src="{{aQrcode.base64QrImg}}">
-                        </div>
+                    <div class="qrImg">
+                        <img class="" ng-src="{{aQrcode.base64QrImg}}">
+                    </div>
 
-                        <div class="">
-                            <!--title-->
-                            <p class="title text-breakall font-italic text-muted">{{aQrcode.title}}</p>
+                    <div class="details">
+                        <!--title-->
+                        <p class="title text-breakall font-italic text-muted">{{aQrcode.title}}</p>
 
-                            <!--url-->
-                            <p class="url text-breakall" href="{{aQrcode.url}}"
-                            target="_blank">{{aQrcode.url}}</p>
+                        <!--url-->
+                        <a class="url text-breakall" href="{{aQrcode.url}}"
+                           target="_blank"><p>{{aQrcode.url}}</p></a>
                     </div>
                 </div>
             </div>
@@ -190,13 +196,17 @@
 </div>
 
 
-<hr>
+<div class="mainFooter">
+    <p>Efficient and Elegant way with QR codes, just feeling it on the fly. 快码二维,疾行如风.</p>
+    <p>Quico. Powered by Bowen © 2016</p>
+</div>
 
+
+<!--hidden elements-->
+<!--<hr>-->
 <div id="qrcode" hidden>
-
     <p id="tabUrl" hidden></p>
     <p id="tabTitle" hidden></p>
-    <!--<a id="hiddenA"></a>-->
 </div>
 
 </body>

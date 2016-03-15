@@ -37,7 +37,27 @@ textarea {
 
 .bookmark:hover {
     cursor: pointer;
-    background: lightgrey;
+    background: #EEEEEE;
+}
+
+/*主二维码*/
+.qrImgContainer {
+    max-width: 70%;
+    align: center;
+}
+
+.qrImgContainer img {
+    margin-right: auto;
+}
+
+/*快捷按钮*/
+.quickButtonsContainer {
+    display: flex;
+}
+
+.quickButtonsContainer .quickButton {
+    flex: 1;
+    margin: 5px 0;
 }
 
 /*右栏最近 URL*/
@@ -46,42 +66,57 @@ textarea {
 
 .recentUrlsContainer .caption {
     text-align: center;
-    padding: 5px;
-    margin: 10px;
-    border-bottom: 1px solid grey;
+    padding: 10px;
+    color: dodgerblue;
 }
 
 .recentUrlsContainer .recentUrl {
     display: flex;
+    margin-bottom: 5px;
+    border-top: 1px solid #DDDDDD;
 }
 
-.recentUrlsContainer .recentUrl .qrImg img{
+.recentUrlsContainer .recentUrl .qrImg img {
     width: 80px;
     height: 80px;
 }
 
 .recentUrlsContainer .recentUrl .qrImg {
-    margin: 5px;
-    min-width: 100px;
-}
-
-.recentUrlsContainer .recentUrl div {
-}
-
-.recentUrlsContainer .recentUrl div .url {
     margin: 3px;
-    font-size: 12px;
-    line-height: 95%;
+    min-width: 80px;
+    flex: 1;
 }
 
-.recentUrlsContainer .recentUrl div .title {
+.recentUrlsContainer .recentUrl .details {
+    flex: 3;
+}
+
+.recentUrlsContainer .recentUrl .details .title {
     margin: 3px;
     font-size: 13px;
     font-style: italic;
+    font-weight: bold;
+}
+
+.recentUrlsContainer .recentUrl .details .url p {
+    margin: 3px;
+    font-size: 12px;
+    line-height: 99%;
 }
 
 .recentUrlsContainer .recentUrl:hover {
     cursor: pointer;
-    background: lightgrey;
-    /*color: white;*/
+    background: #EEEEEE;
+}
+
+/* main 页面下 footer*/
+.mainFooter {
+    padding: 10px;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    color: #BBBBBB;
+    border-top: 1px solid #EEEEEE;
+    text-align: center;
+    font-style: italic;
+    font-size: 14px;
 }
