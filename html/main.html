@@ -144,6 +144,17 @@
 
             <!--快捷按钮-->
             <div class="quickButtonsContainer">
+                <!--新页面打开按钮-->
+                <div class="quickButton">
+                    <a ng-href="{{currentUrl}}" target="_blank">
+                        <button type="button" class="btn btn-sm btn-secondary  btn-block">
+                            <i class="fa fa-arrow-right"></i>
+                            Goto
+                        </button>
+                    </a>
+                </div>
+
+                <!--清空按钮-->
                 <div class="quickButton">
                     <button type="button" class="btn btn-sm btn-warning  btn-block"
                             ng-click="onClickClear()">
@@ -152,6 +163,7 @@
                     </button>
                 </div>
 
+                <!--下载二维码按钮-->
                 <div class="quickButton">
                     <button type="button" class="btn btn-sm btn-primary btn-block"
                             ng-click="onClickDownloadBtn()">
