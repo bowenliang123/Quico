@@ -1,6 +1,8 @@
 /**
  * Created by bowen on 16/3/12.
  */
+'use strict';
+
 angular.module('mainCtrl', [])
     .controller('mainCtrl', function ($scope) {
         $scope.qrCodeList = [];
@@ -112,7 +114,7 @@ angular.module('mainCtrl', [])
                     var quicoBookmarks = msg.bookmarks;
 
 
-                    function loopBookmarkTrees(bookmarkNode) {
+                    let loopBookmarkTrees = function (bookmarkNode) {
                         let hehe = [];
                         if (bookmarkNode.children == undefined) {
                             hehe.push({url: bookmarkNode.url, title: bookmarkNode.title});
