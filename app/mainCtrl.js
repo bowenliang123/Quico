@@ -52,26 +52,36 @@ angular.module('mainCtrl', [])
             $scope.currentCase.base64img = displayQrcode($scope.currentUrl);
 
             if (isRefreshUrlDeatils != false) {
+
                 let aNode = document.createElement('a');
                 aNode.style.display = 'none';
                 document.body.appendChild(aNode);
                 aNode.href = $scope.currentUrl;
 
-                $scope.currentBase = aNode.protocol.concat('//', aNode.host);
-                $scope.currentPath = aNode.pathname.concat();
-                $scope.currentQuery = aNode.search.slice(1, aNode.search.length).concat();
-                $scope.currentHash = aNode.hash.slice(1, aNode.hash.length).concat();
+                if (!aNode.protocol.startsWith('http')) {
+                    //对为HTTP开头的协议或不规范文本，清空详情显示
+                    $scope.currentBase = '';
+                    $scope.currentPath = '';
+                    $scope.currentQuery = '';
+                    $scope.currentHash = '';
+                } else {
+                    //只在文本框为HTTP开头的协议才更新详情
+                    $scope.currentBase = aNode.protocol.concat('//', aNode.host);
+                    $scope.currentPath = aNode.pathname.concat();
+                    $scope.currentQuery = aNode.search.slice(1, aNode.search.length).concat();
+                    $scope.currentHash = aNode.hash.slice(1, aNode.hash.length).concat();
 
-                //拆解 param 字符串
-                let keyValueArr = $scope.currentQuery.split('&');
-                let tmpParams = [];
-                for (let i = 0; i < keyValueArr.length; i++) {
-                    let pair = keyValueArr[i].split('=');
-                    let key = pair[0];
-                    let value = pair[1];
-                    tmpParams.push({key: key, value: value});
+                    //拆解 param 字符串
+                    let keyValueArr = $scope.currentQuery.split('&');
+                    let tmpParams = [];
+                    for (let i = 0; i < keyValueArr.length; i++) {
+                        let pair = keyValueArr[i].split('=');
+                        let key = pair[0];
+                        let value = pair[1];
+                        tmpParams.push({key: key, value: value});
+                    }
+                    $scope.currentParams = tmpParams;
                 }
-                $scope.currentParams = tmpParams;
 
                 //cleanup
                 if (aNode != undefined) {
