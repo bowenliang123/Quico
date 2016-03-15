@@ -14,22 +14,24 @@ textarea {
 }
 
 .bookmarks {
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .bookmark {
-    padding: 5px;
+    padding: 2px 3px 2px 5px;
     margin: 5px 0;
     border: 1px solid lightblue;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
-.bookmark .title{
-    font-size: 14px;
+.bookmark .title {
+    font-size: 13px;
+    font-weight: bold;
+    font-style: italic;
 }
 
-.bookmark .url{
-    font-size: 12px;
+.bookmark .url {
+    font-size: 11px;
 }
 
 .bookmark:hover {
