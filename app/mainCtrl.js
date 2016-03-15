@@ -30,8 +30,24 @@ angular.module('mainCtrl', [])
             //初始化与背景页的链接
             initConnctionToBackground(port);
 
-            //刷新从后台获取的页面
+            //从 GET 参数中获取传入的 url
+            getInputUrl();
+
+            //刷新二维码显示
             refreshQrcodeImage();
+        }
+
+        /**
+         * 从 GET 参数中获取传入的 url
+         */
+        function getInputUrl() {
+            var inputUrl = getURLParameter('url');
+            if (inputUrl == undefined) {
+                return;
+            }
+
+            $scope.currentUrl = inputUrl;
+            console.log('url from input query string' + $scope.currentUrl);
         }
 
 
