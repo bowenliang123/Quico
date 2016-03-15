@@ -3,7 +3,6 @@
  */
 'use strict';
 
-
 angular.module('mainCtrl', [])
     .controller('mainCtrl', function ($scope) {
         $scope.qrCodeList = [];
@@ -17,9 +16,6 @@ angular.module('mainCtrl', [])
             query: '',
             base64img: ''
         };
-
-
-        let urlReg = /^(https?:\/\/[\w\d\-:.]+)(\/?$|[\w\d\/\-%.]+)\??([\w\d\-=%&]*)\#?(.*)/i;
 
 
         var qrcode;
