@@ -1,6 +1,7 @@
 /**
  * Created by bowen on 16/3/12.
  */
+'use strict';
 
 function initQrcodeGenerator(elementId, side) {
     //console.log('initQrcodeGenerator');

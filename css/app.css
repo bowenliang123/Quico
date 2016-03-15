@@ -1,3 +1,4 @@
+/*URL 文本框样式*/
 textarea {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -13,6 +14,7 @@ textarea {
     word-break: break-all;
 }
 
+/*左栏书签*/
 .bookmarks {
     margin-top: 8px;
 }
@@ -36,4 +38,50 @@ textarea {
 .bookmark:hover {
     cursor: pointer;
     background: lightgrey;
+}
+
+/*右栏最近 URL*/
+.recentUrlsContainer {
+}
+
+.recentUrlsContainer .caption {
+    text-align: center;
+    padding: 5px;
+    margin: 10px;
+    border-bottom: 1px solid grey;
+}
+
+.recentUrlsContainer .recentUrl {
+    display: flex;
+}
+
+.recentUrlsContainer .recentUrl .qrImg img{
+    width: 80px;
+    height: 80px;
+}
+
+.recentUrlsContainer .recentUrl .qrImg {
+    margin: 5px;
+    min-width: 100px;
+}
+
+.recentUrlsContainer .recentUrl div {
+}
+
+.recentUrlsContainer .recentUrl div .url {
+    margin: 3px;
+    font-size: 12px;
+    line-height: 95%;
+}
+
+.recentUrlsContainer .recentUrl div .title {
+    margin: 3px;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.recentUrlsContainer .recentUrl:hover {
+    cursor: pointer;
+    background: lightgrey;
+    /*color: white;*/
 }

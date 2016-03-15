@@ -152,32 +152,37 @@
                         <i class="fa fa-arrow-down"></i>
                         Download
                     </button>
-                    <!--<button type="button" class="btn btn-secondary col-sm-4">Right</button>-->
                 </div>
             </div>
 
 
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-info">
+            <!--最近 URL-->
+            <div class="recentUrlsContainer">
+                <!--caption-->
+                <div class="caption">
                     <i class="fa fa-rocket"></i>
                     Recent URLs
-                </li>
+                </div>
 
-                <button type="button" class="list-group-item text-breakall"
-                        ng-repeat="aQrcode in qrCodeList"
-                        ng-click="onClickRecentUrls(aQrcode.url)">
-                    <div class="row">
-                        <div class="col-sm-3 p-x-0">
-                            <img class="img-fluid" ng-src="{{aQrcode.base64QrImg}}">
+                <!--recentUrl List-->
+                <div class="recentUrl  text-breakall"
+                     ng-repeat="aQrcode in qrCodeList"
+                     ng-click="onClickRecentUrls(aQrcode.url)">
+
+                        <div class="qrImg">
+                            <img class="" ng-src="{{aQrcode.base64QrImg}}">
                         </div>
-                        <div class="col-sm-9 p-r-0">
-                            <a class="text-breakall text-primary" href="{{aQrcode.url}}"
-                               target="_blank">{{aQrcode.url}}</a>
-                            <p class="text-breakall font-italic text-muted">{{aQrcode.title}}</p>
-                        </div>
+
+                        <div class="">
+                            <!--title-->
+                            <p class="title text-breakall font-italic text-muted">{{aQrcode.title}}</p>
+
+                            <!--url-->
+                            <p class="url text-breakall" href="{{aQrcode.url}}"
+                            target="_blank">{{aQrcode.url}}</p>
                     </div>
-                </button>
-            </ul>
+                </div>
+            </div>
 
         </div>
 
