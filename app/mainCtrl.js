@@ -177,17 +177,6 @@ angular.module('mainCtrl', [])
             return base64QrImg;
         }
 
-        /**
-         * 显示标题和 URL
-         * @param title
-         * @param url
-         */
-        function displayMetaInfo(title, url) {
-            document.getElementById("tabTitle").innerHTML = title;
-            document.getElementById("tabUrl").innerHTML = url;
-        }
-
-
         function getAllQuicoBookmarksFromBackground(port) {
             if (port == undefined) {
                 return;
