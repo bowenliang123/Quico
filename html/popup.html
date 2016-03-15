@@ -10,24 +10,37 @@
     <!--fontawesome css-->
     <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
 
-    <!-- jQuery first, then Bootstrap JS. -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--app css-->
+    <link rel="stylesheet" href="../css/popup.css">
+
 </head>
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div id="qrcode" class="center-block m-y-1 m-x-1"></div>
+        <div id="qrcode" class="center-block m-a-1"></div>
     </div>
     <div class="row">
-        <button id="btn-main" class="btn btn-block btn-sm btn-primary">
+        <button id="btn-main" class="btn btn-block btn-sm btn-link text-success">
             <i class="fa fa-home"></i>
             Enter Quico 快码
         </button>
     </div>
+    <div class="row">
+        <button id="btn-download" class="btn btn-block btn-link text-primary btn-sm ">
+            <i class="fa fa-download"></i>
+            下载二维码
+        </button>
+    </div>
 </div>
 </body>
+
+<!-- jQuery first, then Bootstrap JS. -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!--app-->
 <script src="../bower_components/qrcode.js/qrcode.js"></script>
 <script src="../js/util/qr_util.js"></script>
 <script src="../js/popup.js"></script>
+
 </html>

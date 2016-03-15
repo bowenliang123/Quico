@@ -6,15 +6,14 @@
 console.log('popup.js');
 
 //变量
-var qrcode;
 
-var currentUrl;
+var qrcodeElement;
+var currentUrl; //当前页面 URL
 
 //获取当前窗口URL
 chrome.tabs.query({active: true, currentWindow: true}, function (tabArray) {
-    let currentTab = tabArray[0];
 
-    currentUrl = currentTab.url;
+    currentUrl = tabArray[0].url;
 
     //生成二维码显示到canvas
     displayQrcode(currentUrl);
@@ -26,12 +25,23 @@ chrome.tabs.query({active: true, currentWindow: true}, function (tabArray) {
  * @param url
  */
 function displayQrcode(url) {
-    if (qrcode == undefined) {
-        qrcode = initQrcodeGenerator('qrcode', 200);
+    if (qrcodeElement == undefined) {
+        qrcodeElement = initQrcodeGenerator('qrcode', 200);
     }
 
-    qrcode.makeCode(url);
+    qrcodeElement.makeCode(url);
 }
+
+//按钮事件 - 主页面按钮
+var qrcodeDiv = document.getElementById("qrcode");
+qrcodeDiv.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    //用新标签打开主面板页
+    chrome.tabs.create({
+        url: 'html/main.html?url=' + currentUrl
+    });
+});
 
 
 //按钮事件 - 主页面按钮
@@ -43,4 +53,15 @@ mainBtn.addEventListener('click', function (event) {
     chrome.tabs.create({
         url: 'html/main.html?url=' + currentUrl
     });
+});
+
+
+//按钮事件 - 点击下载按钮
+var downloadBtn = document.getElementById("btn-download");
+downloadBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    let canvas = $('#qrcode canvas').get(0);
+    let base64QrImg = canvas.toDataURL();
+    invokeDownloadQrImgFile(base64QrImg);
 });
