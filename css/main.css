@@ -23,6 +23,7 @@ textarea {
     padding: 2px 3px;
     margin: 3px 0;
     border-bottom: 1px solid lightgrey;
+    transition-duration: 0.4s;
 }
 
 .bookmark .title {
@@ -73,6 +74,7 @@ textarea {
     display: flex;
     margin-bottom: 5px;
     border-top: 1px solid #DDDDDD;
+    transition-duration: 0.4s;
 }
 
 .recentUrlsContainer .recentUrl .qrImg img {
