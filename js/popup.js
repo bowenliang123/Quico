@@ -38,7 +38,7 @@ qrcodeDiv.addEventListener('click', function (event) {
 
     //用新标签打开主面板页
     chrome.tabs.create({
-        url: 'html/main.html?url=' + currentUrl
+        url: 'html/main.html?url=' + encodeURI(currentUrl)
     });
 });
 
@@ -50,7 +50,7 @@ mainBtn.addEventListener('click', function (event) {
 
     //用新标签打开主面板页
     chrome.tabs.create({
-        url: 'html/main.html?url=' + currentUrl
+        url: 'html/main.html?url=' + encodeURI(currentUrl)
     });
 });
 
