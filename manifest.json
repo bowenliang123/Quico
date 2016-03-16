@@ -1,7 +1,7 @@
 {
   "name": "Quico 快码 次世代生产力二维码工具",
   "version": "0.2.2",
-  "description": "A productive QR code toolkit with efficiency and elegance, just feeling it on the fly. 快码二维,疾行如风.",
+  "description": "A productive QR code toolkit with efficiency and elegance, just feeling it on the fly. More than just a QR code generator.快码二维,疾行如风.",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "icons": {
