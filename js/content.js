@@ -1,3 +1,3 @@
 'use strict';
 
-console.log('content.js');
+//console.log('content.js');
