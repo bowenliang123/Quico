@@ -208,3 +208,13 @@ function getQuicoBookmarks(callback) {
         }
     });
 }
+
+
+//监听插件安装事件
+chrome.runtime.onInstalled.addListener(function () {
+
+    //用新标签打开主面板页
+    chrome.tabs.create({
+        url: 'html/main.html?url=' + 'http://www.domain.com/index?author=BowenLiang'
+    });
+});
