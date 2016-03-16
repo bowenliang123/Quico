@@ -217,3 +217,21 @@ chrome.runtime.onInstalled.addListener(function () {
         url: 'html/main.html?url=' + encodeURIComponent('http://www.domain.com/index?author=BowenLiang&extension=Quico#efficencyFirst')
     });
 });
+
+//添加右键菜单
+chrome.contextMenus.create({
+    title: '用 Quico 获取二维码',
+    onclick: function () {
+
+        //获取当前窗口URL
+        chrome.tabs.query({active: true, currentWindow: true}, function (tabArray) {
+            //用新标签打开主面板页
+            chrome.tabs.create({
+                url: 'html/main.html?url=' + encodeURIComponent(tabArray[0].url)
+            });
+        });
+
+    }
+}, function () {
+
+});
