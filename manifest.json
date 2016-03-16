@@ -1,6 +1,6 @@
 {
   "name": "Quico 快码 次世代生产力二维码工具",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "description": "Efficiency and Elegance with Quico, just feeling it on the fly. 快码二维,疾行如风.",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
