@@ -189,15 +189,15 @@
             <div>
 
                 <!--新页面打开按钮-->
-                <a ng-href="{{currentUrl}}" target="_blank">
-                    <button type="button" class="btn btn-sm btn-success quickButton">
+                <a href="{{currentUrl}}" target="_blank">
+                    <button type="button" class="btn btn-sm btn-success p-a-0 quickButton ">
                         <i class="fa fa-arrow-right"></i>
                         Goto
                     </button>
                 </a>
 
                 <!--清空按钮-->
-                <button type="button" class="btn btn-sm btn-danger  quickButton"
+                <button type="button" class="btn btn-sm btn-danger p-a-0 quickButton"
                         ng-click="onClickClear()">
                     <i class="fa fa-times"></i>
                     Clear
@@ -207,7 +207,7 @@
 
             <div>
                 <!--下载二维码按钮-->
-                <button type="button" class="btn btn-sm btn-primary quickButton "
+                <button type="button" class="btn btn-sm btn-primary p-a-0 quickButton "
                         ng-click="onClickDownloadBtn()">
                     <i class="fa fa-arrow-down"></i>
                     Download
@@ -215,7 +215,7 @@
 
 
                 <!--上传二维码按钮-->
-                <button type="button" class="btn btn-sm btn-warning quickButton"
+                <button type="button" class="btn btn-sm btn-warning p-a-0 quickButton"
                         ng-click="onClickUploadBtn()">
                     <i class="fa fa-arrow-up"></i>
                     Upload
