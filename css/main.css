@@ -47,13 +47,12 @@ textarea {
 }
 
 .qrImgContainer img {
-    margin-right: auto;
 }
 
 /*快捷按钮*/
 .quickButton{
-    min-width: 130px;
-    margin: 3px;
+    min-width: 120px;
+    margin: 2px;
 }
 
 /*右栏最近 URL*/
