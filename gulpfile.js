@@ -30,7 +30,7 @@ gulp.task('clean', function () {
 });
 
 // zip
-gulp.task('zip', function () {
+gulp.task('zip', ['move'], function () {
     return gulp.src('dist/**/*', {"base": "."})
         .pipe(zip('quico-' + new Date() + '.zip'))
         .pipe(gulp.dest('releases'));
@@ -38,8 +38,7 @@ gulp.task('zip', function () {
 
 
 // Build
-gulp.task('build', ['move'], function () {
-    gulp.run('zip');
+gulp.task('build', ['zip'], function () {
 });
 
 // Default
