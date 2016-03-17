@@ -7,13 +7,35 @@ var gulp = require('gulp'),
 
 
 // 复制必要的文件
-gulp.task('move', ['clean'], function () {
+gulp.task('copyBower', ['clean'], function () {
+    return gulp.src([
+            //angular
+            'bower_components/angular/angular.min.js',
+
+            //boostrap
+            'bower_components/bootstrap/dist/**/*',
+
+            //font-awesome
+            'bower_components/font-awesome/css/**/*',
+            'bower_components/font-awesome/fonts/**/*',
+
+            //jquery
+            'bower_components/jquery/dist/**/*',
+
+            //qrcode.js
+            'bower_components/qrcode.js/qrcode.js',
+        ], {"base": "."})
+        .pipe(gulp.dest('dist/'));
+});
+
+// 复制必要的文件
+gulp.task('copy', ['copyBower', 'clean'], function () {
     return gulp.src([
             'manifest.json',
             'html/*',
             'js/**/*',
             'css/*',
-            'bower_components/**/',
+            //'bower_components/**/',
             'img/*'
         ], {"base": "."})
         .pipe(gulp.dest('dist/'));
@@ -30,7 +52,7 @@ gulp.task('clean', function () {
 });
 
 // zip
-gulp.task('zip', ['move'], function () {
+gulp.task('zip', ['clean', 'copy'], function () {
     return gulp.src('dist/**/*', {"base": "."})
         .pipe(zip('quico-' + new Date() + '.zip'))
         .pipe(gulp.dest('releases'));
@@ -38,7 +60,7 @@ gulp.task('zip', ['move'], function () {
 
 
 // Build
-gulp.task('build', ['zip'], function () {
+gulp.task('build', ['clean', 'copy', 'zip'], function () {
 });
 
 // Default
@@ -48,7 +70,13 @@ gulp.task('default', ['build'], function () {
 
 // Watch
 gulp.task('watch', function () {
-    gulp.watch('gulpfile.js', function (event) {
+    gulp.watch([
+        'js/**/*',
+        'css/**/*',
+        'html/**/*',
+        'img/**/*',
+        'bower_components/**/*',
+    ], function (event) {
         gulp.run('build');
     })
 });
