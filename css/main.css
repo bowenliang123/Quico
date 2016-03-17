@@ -51,13 +51,9 @@ textarea {
 }
 
 /*快捷按钮*/
-.quickButtonsContainer {
-    display: flex;
-}
-
-.quickButtonsContainer .quickButton {
-    flex: 1;
-    margin: 5px 0;
+.quickButton{
+    min-width: 130px;
+    margin: 3px;
 }
 
 /*右栏最近 URL*/

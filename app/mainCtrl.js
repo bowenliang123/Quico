@@ -40,7 +40,7 @@ angular.module('mainCtrl', [])
         function getInputUrl() {
             let inputUrl = getURLParameter('url');
             console.log('url from input query string' + $scope.currentUrl);
-            
+
             if (inputUrl == undefined || !inputUrl.startsWith('http')) {
                 return;
             }
@@ -258,4 +258,44 @@ angular.module('mainCtrl', [])
             //触发下载二维码文件
             invokeDownloadQrImgFile($scope.currentCase.base64img);
         }
+
+
+        //鼠标点击 - 点击上传按钮
+        $scope.onClickUploadBtn = function () {
+            //触发隐藏的 input 元素点击事件
+            $('#uploadInput').click();
+        }
     });
+
+
+//响应二维码图片上传input 元素点击事件
+$('#uploadInput').change( function (e) {
+    let filePath = $('#uploadInput')[0].files[0];
+    let reader = new FileReader();
+
+    if (filePath) {
+        //响应事件 -  文件读取完成
+        reader.addEventListener("load", function () {
+            //reader.result
+            if (!reader.result.startsWith('data:image/')) {
+                //非图片格式
+                alert('Please ensure you are uploading an image file.');
+            }
+
+            // 响应事件 - base64图像二维码解码后结果
+            qrcode.callback = function (data) {
+                //用新标签打开主面板页
+                chrome.tabs.create({
+                    url: 'html/main.html?url=' + encodeURIComponent(data)
+                });
+            };
+
+            //执行解码
+            qrcode.decode(reader.result);
+        }, false);
+
+
+        //将文件读取为 Base64格式
+        reader.readAsDataURL(filePath);
+    }
+});

@@ -22,11 +22,31 @@
 
     <!-- angular v1 -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
-    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
 
 
     <!--lib-->
     <script src="../bower_components/qrcode.js/qrcode.js"></script>
+
+
+    <!--jsqrcode for decoding qr code image-->
+    <script type="text/javascript" src="../js/jsqrcode-master/src/grid.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/version.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/detector.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/formatinf.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/errorlevel.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/bitmat.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/datablock.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/bmparser.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/datamask.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/rsdecoder.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/gf256poly.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/gf256.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/decoder.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/qrcode.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/findpat.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/alignpat.js"></script>
+    <script type="text/javascript" src="../js/jsqrcode-master/src/databr.js"></script>
 
     <!--angular app-->
     <script src="../app/app.js"></script>
@@ -175,35 +195,40 @@
             </div>
 
             <!--快捷按钮-->
-            <div class="quickButtonsContainer">
+            <div>
+
                 <!--新页面打开按钮-->
-                <div class="quickButton">
-                    <a ng-href="{{currentUrl}}" target="_blank">
-                        <button type="button" class="btn btn-sm btn-success btn-block">
-                            <i class="fa fa-arrow-right"></i>
-                            Goto
-                        </button>
-                    </a>
-                </div>
+                <a ng-href="{{currentUrl}}" target="_blank">
+                    <button type="button" class="btn btn-sm btn-success quickButton">
+                        <i class="fa fa-arrow-right"></i>
+                        Goto
+                    </button>
+                </a>
 
                 <!--清空按钮-->
-                <div class="quickButton">
-                    <button type="button" class="btn btn-sm btn-warning  btn-block"
-                            ng-click="onClickClear()">
-                        <i class="fa fa-times"></i>
-                        Clear
-                    </button>
-                </div>
+                <button type="button" class="btn btn-sm btn-danger  quickButton"
+                        ng-click="onClickClear()">
+                    <i class="fa fa-times"></i>
+                    Clear
+                </button>
 
+            </div>
+
+            <div>
                 <!--下载二维码按钮-->
-                <div class="quickButton">
-                    <button type="button" class="btn btn-sm btn-primary btn-block"
-                            ng-click="onClickDownloadBtn()">
-                        <i class="fa fa-arrow-down"></i>
-                        Download
-                    </button>
-                </div>
+                <button type="button" class="btn btn-sm btn-primary quickButton "
+                        ng-click="onClickDownloadBtn()">
+                    <i class="fa fa-arrow-down"></i>
+                    Download
+                </button>
 
+
+                <!--上传二维码按钮-->
+                <button type="button" class="btn btn-sm btn-warning quickButton"
+                        ng-click="onClickUploadBtn()">
+                    <i class="fa fa-arrow-up"></i>
+                    Upload
+                </button>
             </div>
 
 
@@ -244,6 +269,8 @@
     <p>Efficiency and Elegance with QR codes, just feeling it on the fly. 快码二维,疾行如风.</p>
     <p>Quico. Powered by Bowen © 2016</p>
 </div>
+
+<input type="file" id="uploadInput" accept="image/*" hidden>
 
 </body>
 
