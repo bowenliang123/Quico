@@ -15,6 +15,7 @@
     "bookmarks",
     "contextMenus"
   ],
+  "omnibox": { "keyword" : "quico" },
   "options_page": "html/options.html",
   "background": {
     "scripts": [

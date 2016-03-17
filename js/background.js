@@ -211,6 +211,7 @@ function getQuicoBookmarks(callback) {
 
 
 //监听插件安装事件
+//https://developer.chrome.com/extensions/runtime#event-onInstalled
 chrome.runtime.onInstalled.addListener(function () {
     //用新标签打开主面板页
     chrome.tabs.create({
@@ -230,5 +231,14 @@ chrome.contextMenus.create({
         });
     }
 }, function () {
+});
 
+
+//添加 omnibox 命令响应
+//https://developer.chrome.com/extensions/omnibox#event-onInputEntered
+chrome.omnibox.onInputEntered.addListener(function (text, disposition) {
+    //用新标签打开主面板页
+    chrome.tabs.create({
+        url: 'html/main.html?url=' + encodeURIComponent(text)
+    });
 });
