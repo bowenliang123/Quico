@@ -221,16 +221,13 @@ chrome.runtime.onInstalled.addListener(function () {
 //添加右键菜单
 chrome.contextMenus.create({
     title: '用 Quico 获取二维码',
-    onclick: function () {
+    onclick: function (info, tab) {
 
-        //获取当前窗口URL
-        chrome.tabs.query({active: true, currentWindow: true}, function (tabArray) {
-            //用新标签打开主面板页
-            chrome.tabs.create({
-                url: 'html/main.html?url=' + encodeURIComponent(tabArray[0].url)
-            });
+        //用新标签打开主面板页
+        chrome.tabs.create({
+            //url: 'html/main.html?url=' + encodeURIComponent(tabArray[0].url)
+            url: 'html/main.html?url=' + encodeURIComponent(tab.url)
         });
-
     }
 }, function () {
 
