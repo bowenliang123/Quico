@@ -223,9 +223,9 @@ chrome.contextMenus.create({
     title: '用 Quico 获取二维码',
     onclick: function (info, tab) {
 
+
         //用新标签打开主面板页
         chrome.tabs.create({
-            //url: 'html/main.html?url=' + encodeURIComponent(tabArray[0].url)
             url: 'html/main.html?url=' + encodeURIComponent(tab.url)
         });
     }
