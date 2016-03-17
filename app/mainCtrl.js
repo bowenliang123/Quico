@@ -39,7 +39,7 @@ angular.module('mainCtrl', [])
          */
         function getInputUrl() {
             let inputUrl = getURLParameter('url');
-            console.log('url from input query string' + $scope.currentUrl);
+            console.log('url from input query string: ' + $scope.currentUrl);
 
             if (inputUrl == undefined || !inputUrl.startsWith('http')) {
                 return;

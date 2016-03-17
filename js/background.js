@@ -215,7 +215,7 @@ function getQuicoBookmarks(callback) {
 chrome.runtime.onInstalled.addListener(function () {
     //用新标签打开主面板页
     chrome.tabs.create({
-        url: 'html/main.html?url=' + encodeURIComponent('http://www.domain.com/index?author=BowenLiang&extension=Quico#efficencyFirst')
+        url: 'html/main.html?url=' + encodeURIComponent('http://www.domain.com/index?author=BowenLiang&extension=Quico#efficiencyFirst')
     });
 });
 
