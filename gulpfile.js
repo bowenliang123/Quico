@@ -16,14 +16,14 @@ gulp.task('move', ['clean'], function () {
             'bower_components/**/',
             'img/*'
         ], {"base": "."})
-        .pipe(gulp.dest('dist_quico/'));
+        .pipe(gulp.dest('dist/'));
 });
 
 
 // Clean
 gulp.task('clean', function () {
     return gulp.src([
-            'dist_quico/',
+            'dist/',
             'releases/'
         ], {read: false})
         .pipe(clean());
@@ -31,7 +31,7 @@ gulp.task('clean', function () {
 
 // zip
 gulp.task('zip', function () {
-    return gulp.src('dist_quico/**/*', {"base": "."})
+    return gulp.src('dist/**/*', {"base": "."})
         .pipe(zip('quico-' + new Date() + '.zip'))
         .pipe(gulp.dest('releases'));
 });
@@ -39,6 +39,11 @@ gulp.task('zip', function () {
 
 // Build
 gulp.task('build', ['move'], function () {
+    gulp.run('zip');
+});
+
+// Default
+gulp.task('default', ['build'], function () {
     gulp.run('zip');
 });
 
