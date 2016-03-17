@@ -3,7 +3,7 @@
   "version": "0.3.2",
   "description": "A productive QR code toolkit with efficiency and elegance, just feeling it on the fly. More than a QR code generator.快码二维,疾行如风.",
   "manifest_version": 2,
-  "content_security_policy": "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://ssl.google-analytics.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
   "icons": {
     "16": "img/icon_16.png",
     "48": "img/icon_48.png",
