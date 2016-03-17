@@ -5,6 +5,10 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     zip = require('gulp-zip');
 
+let getYYYYMMDDHHMM = function(){
+    let date=new Date();
+    return `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}-${date.getHours()}${date.getMinutes()}`;
+}
 
 // 复制必要的文件
 gulp.task('copyBower', ['clean'], function () {
@@ -54,7 +58,7 @@ gulp.task('clean', function () {
 // zip
 gulp.task('zip', ['clean', 'copy'], function () {
     return gulp.src('dist/**/*', {"base": "."})
-        .pipe(zip('quico-' + new Date() + '.zip'))
+        .pipe(zip('quico-' + getYYYYMMDDHHMM() + '.zip'))
         .pipe(gulp.dest('releases'));
 });
 
@@ -71,6 +75,7 @@ gulp.task('default', ['build'], function () {
 // Watch
 gulp.task('watch', function () {
     gulp.watch([
+        'manifest.json',
         'js/**/*',
         'css/**/*',
         'html/**/*',
