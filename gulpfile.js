@@ -5,10 +5,13 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     zip = require('gulp-zip');
 
-let getYYYYMMDDHHMM = function(){
-    let date=new Date();
-    return `${date.getFullYear()}${date.getMonth()+1}${date.getDate()}-${date.getHours()}${date.getMinutes()}`;
-}
+let getYYYYMMDDHHMM = function () {
+    let toXX = function (input) {
+        return (input < 10) ? ('0' + input) : input;
+    };
+    let date = new Date();
+    return `${date.getFullYear()}${toXX(date.getMonth() + 1)}${toXX(date.getDate())}${toXX(date.getHours())}${toXX(date.getMinutes())}`;
+};
 
 // 复制必要的文件
 gulp.task('copyBower', ['clean'], function () {
