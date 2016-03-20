@@ -19,8 +19,7 @@
   "options_page": "html/options.html",
   "background": {
     "scripts": [
-      "js/background.js",
-      "js/track.js"
+      "js/background.js"
     ]
   },
   "browser_action": {
