@@ -2,7 +2,6 @@
 
 console.log('background.js');
 
-
 //变量
 
 //main 页面连接
