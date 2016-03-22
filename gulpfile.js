@@ -1,7 +1,7 @@
 'use strict';
 
 // Load plugins
-var gulp = require('gulp'),
+const gulp = require('gulp'),
     clean = require('gulp-clean'),
     zip = require('gulp-zip');
 
@@ -36,7 +36,7 @@ gulp.task('copyBower', ['clean'], function () {
 });
 
 // 复制必要的文件
-gulp.task('copy', ['copyBower', 'clean'], function () {
+gulp.task('copy', ['clean', 'copyBower'], function () {
     return gulp.src([
             'manifest.json',
             'html/*',
@@ -72,13 +72,13 @@ gulp.task('build', ['clean', 'copy', 'zip'], function () {
 
 // Default
 gulp.task('default', ['build'], function () {
-    gulp.run('zip');
 });
 
 // Watch
 gulp.task('watch', function () {
     gulp.watch([
         'manifest.json',
+        'gulpfile.js',
         'js/**/*',
         'css/**/*',
         'html/**/*',
