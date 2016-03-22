@@ -14,6 +14,15 @@ textarea {
     word-break: break-all;
 }
 
+/*标题栏*/
+.slogan:hover {
+    cursor: pointer;
+}
+
+.slogan *:hover {
+    cursor: pointer;
+}
+
 /*左栏书签*/
 .bookmarks {
     margin-top: 8px;
@@ -50,7 +59,7 @@ textarea {
 }
 
 /*快捷按钮*/
-.quickButton{
+.quickButton {
     min-width: 120px;
     margin: 2px;
 }

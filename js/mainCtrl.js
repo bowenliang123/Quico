@@ -265,11 +265,18 @@ angular.module('mainCtrl', [])
             //触发隐藏的 input 元素点击事件
             $('#uploadInput').click();
         }
+
+        $scope.newTabToWebStorePage = function () {
+            //用新标签打开chrome web store 的插件详情页
+            chrome.tabs.create({
+                url: 'https://chrome.google.com/webstore/detail/cobbkmppakjllmgndpfmejaflbjfehci'
+            });
+        }
     });
 
 
 //响应二维码图片上传input 元素点击事件
-$('#uploadInput').change( function (e) {
+$('#uploadInput').change(function (e) {
     let filePath = $('#uploadInput')[0].files[0];
     let reader = new FileReader();
 
