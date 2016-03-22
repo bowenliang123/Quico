@@ -84,7 +84,5 @@ gulp.task('watch', function () {
         'html/**/*',
         'img/**/*',
         'bower_components/**/*',
-    ], function (event) {
-        gulp.run('build');
-    })
+    ], ['build']);
 });
