@@ -1,7 +1,7 @@
 {
   "name": "quico",
   "version": "1.0.0",
-  "description": "A productive QR code toolkit with efficiency and elegance, just feeling it on the fly. More than a QR code generator.快码二维,疾行如风.",
+  "description": "Productive QR code toolkit with efficiency and elegance, just feeling it on the fly. More than a QR code generator.快码二维,疾行如风.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

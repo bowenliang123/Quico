@@ -1,7 +1,7 @@
 {
-  "name": "Quico 快码 A productive QR code toolkit",
+  "name": "Quico 快码 QR Code Generator 二维码 生成器",
   "version": "0.3.4",
-  "description": "A productive QR code toolkit with efficiency and elegance, just feeling it on the fly. More than a QR code generator.快码二维,疾行如风.",
+  "description": "Productive QR Code Generator with efficiency and elegance, just feeling it on the fly. More than a QR code generator.快码二维,疾行如风.",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
   "icons": {
@@ -15,7 +15,9 @@
     "bookmarks",
     "contextMenus"
   ],
-  "omnibox": { "keyword" : "quico" },
+  "omnibox": {
+    "keyword": "quico"
+  },
   "options_page": "html/options.html",
   "background": {
     "scripts": [
