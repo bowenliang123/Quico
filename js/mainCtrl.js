@@ -274,7 +274,6 @@ angular.module('mainCtrl', [])
         }
     });
 
-
 //响应二维码图片上传input 元素点击事件
 $('#uploadInput').change(function (e) {
     let filePath = $('#uploadInput')[0].files[0];
