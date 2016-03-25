@@ -256,7 +256,7 @@ angular.module('mainCtrl', [])
         //鼠标点击 - 点击 下载二维码 按钮
         $scope.onClickDownloadBtn = function () {
             //触发下载二维码文件
-            invokeDownloadQrImgFile($scope.currentCase.base64img);
+            invokeDownloadQrImgFile($scope.currentUrl, $scope.currentCase.base64img);
         }
 
 

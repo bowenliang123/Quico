@@ -42,7 +42,7 @@ function initQrcodeGenerator(elementId, side) {
  * 触发下载二维码文件
  * @param base64img
  */
-function invokeDownloadQrImgFile(base64img) {
+function invokeDownloadQrImgFile(url, base64img) {
     //初始化链接
     let downloadLink = document.createElement("a");
 
@@ -50,7 +50,7 @@ function invokeDownloadQrImgFile(base64img) {
     downloadLink.href = base64img.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
 
     //文件名
-    downloadLink.download = "QRcode.png";
+    downloadLink.download = `Quico ${url}.png`;
 
     //加入到文档中
     document.body.appendChild(downloadLink);

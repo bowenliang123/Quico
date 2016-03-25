@@ -221,9 +221,8 @@ chrome.runtime.onInstalled.addListener(function () {
 
 //添加右键菜单
 chrome.contextMenus.create({
-    title: '用 Quico 获取二维码',
+    title: 'get QR code',
     onclick: function (info, tab) {
-
 
         //用新标签打开主面板页
         chrome.tabs.create({

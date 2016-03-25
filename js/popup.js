@@ -62,5 +62,5 @@ downloadBtn.addEventListener('click', function (event) {
 
     let canvas = $('#qrcode canvas').get(0);
     let base64QrImg = canvas.toDataURL();
-    invokeDownloadQrImgFile(base64QrImg);
+    invokeDownloadQrImgFile(currentUrl, base64QrImg);
 });
