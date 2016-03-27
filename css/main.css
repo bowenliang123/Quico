@@ -125,3 +125,7 @@ textarea {
     font-style: italic;
     font-size: 14px;
 }
+
+.mainFooter iframe{
+    margin: 0 0 0 5px;
+}
