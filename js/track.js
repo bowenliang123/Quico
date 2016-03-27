@@ -3,7 +3,7 @@
  *
  * Created by bowen on 16/3/16.
  */
-
+'use strict';
 
 var _AnalyticsCode = 'UA-75165383-1';
 
