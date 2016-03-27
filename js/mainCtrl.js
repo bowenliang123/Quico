@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('mainCtrl', [])
-    .controller('mainCtrl', function ($scope) {
+    .controller('mainCtrl', ($scope) => {
         $scope.qrCodeList = [];
         $scope.latestTab = undefined;
         $scope.currentUrl = '';
@@ -105,7 +105,7 @@ angular.module('mainCtrl', [])
 
 
             //响应断开, 自动重连
-            port.onDisconnect.addListener(function () {
+            port.onDisconnect.addListener(() => {
                 console.warn('background connection onDisconnect. trying to reconnect.');
 
                 //重连
@@ -113,7 +113,7 @@ angular.module('mainCtrl', [])
             });
 
             //响应消息
-            port.onMessage.addListener(function (msg) {
+            port.onMessage.addListener((msg) => {
 
                 console.log('onMessage');
                 console.log(msg);
@@ -140,12 +140,12 @@ angular.module('mainCtrl', [])
                     let quicoBookmarks = msg.bookmarks;
 
 
-                    let loopBookmarkTrees = function (bookmarkNode) {
+                    let loopBookmarkTrees = (bookmarkNode) => {
                         let hehe = [];
                         if (bookmarkNode.children == undefined) {
                             hehe.push({url: bookmarkNode.url, title: bookmarkNode.title});
                         } else {
-                            bookmarkNode.children.forEach(function (bookmark) {
+                            bookmarkNode.children.forEach((bookmark) => {
                                 console.log(bookmark);
                                 hehe = hehe.concat(loopBookmarkTrees(bookmark));
                             });
@@ -198,7 +198,7 @@ angular.module('mainCtrl', [])
         //事件注册
         $scope.onChangeUrlTexteara = refreshQrcodeImage;
 
-        $scope.onChangeUrlDetails = function (isRefreshUrlDeatils) {
+        $scope.onChangeUrlDetails = (isRefreshUrlDeatils) => {
 
             let newUrl = [
                 $scope.currentBase,
@@ -213,13 +213,13 @@ angular.module('mainCtrl', [])
         };
 
 
-        $scope.onClickRecentUrls = function (url) {
+        $scope.onClickRecentUrls = (url) => {
             $scope.currentUrl = url;
             refreshQrcodeImage();
         };
 
 
-        $scope.onChangeParams = function (index) {
+        $scope.onChangeParams = (index) => {
 
             //忽略字符串为空的时候
             if ($scope.currentParams == undefined || $scope.currentParams.length == 0) {
@@ -228,7 +228,7 @@ angular.module('mainCtrl', [])
 
             //拼接 query 字符串
             let newQueryStr = '';
-            $scope.currentParams.forEach(function (param) {
+            $scope.currentParams.forEach((param) => {
                 newQueryStr = newQueryStr.concat(param.key, '=', param.value, '&');
             });
             newQueryStr = newQueryStr.slice(0, newQueryStr.length - 1)
@@ -242,31 +242,31 @@ angular.module('mainCtrl', [])
 
 
         //鼠标点击 - 点击 quico 书签标题
-        $scope.openQuicoBookmarksInNewTab = function () {
+        $scope.openQuicoBookmarksInNewTab = ()=> {
             chrome.tabs.create({url: 'chrome://bookmarks/#' + $scope.bookmarksRootId});
         };
 
         //鼠标点击 - 点击 clear 按钮
-        $scope.onClickClear = function () {
+        $scope.onClickClear = ()=> {
             $scope.currentUrl = '';
             refreshQrcodeImage();
         };
 
 
         //鼠标点击 - 点击 下载二维码 按钮
-        $scope.onClickDownloadBtn = function () {
+        $scope.onClickDownloadBtn = ()=> {
             //触发下载二维码文件
             invokeDownloadQrImgFile($scope.currentUrl, $scope.currentCase.base64img);
         }
 
 
         //鼠标点击 - 点击上传按钮
-        $scope.onClickUploadBtn = function () {
+        $scope.onClickUploadBtn = ()=> {
             //触发隐藏的 input 元素点击事件
             $('#uploadInput').click();
-        }
+        };
 
-        $scope.newTabToWebStorePage = function () {
+        $scope.newTabToWebStorePage = ()=> {
             //用新标签打开chrome web store 的插件详情页
             chrome.tabs.create({
                 url: 'https://chrome.google.com/webstore/detail/cobbkmppakjllmgndpfmejaflbjfehci'
@@ -275,13 +275,13 @@ angular.module('mainCtrl', [])
     });
 
 //响应二维码图片上传input 元素点击事件
-$('#uploadInput').change(function (e) {
+$('#uploadInput').change((e) => {
     let filePath = $('#uploadInput')[0].files[0];
     let reader = new FileReader();
 
     if (filePath) {
         //响应事件 -  文件读取完成
-        reader.addEventListener("load", function () {
+        reader.addEventListener("load", ()=> {
             //reader.result
             if (!reader.result.startsWith('data:image/')) {
                 //非图片格式
@@ -289,7 +289,7 @@ $('#uploadInput').change(function (e) {
             }
 
             // 响应事件 - base64图像二维码解码后结果
-            qrcode.callback = function (data) {
+            qrcode.callback = (data)=> {
                 //用新标签打开主面板页
                 chrome.tabs.create({
                     url: 'html/main.html?url=' + encodeURIComponent(data)

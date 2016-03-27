@@ -27,7 +27,7 @@ function init() {
 
 function handleRuntimeConnnection() {
     //监听长时间连接
-    chrome.runtime.onConnect.addListener(function (port) {
+    chrome.runtime.onConnect.addListener((port) => {
         //console.log(port);
 
         let latestTab = getLatestTab();
@@ -43,7 +43,7 @@ function handleRuntimeConnnection() {
         }
 
         //响应消息
-        port.onMessage.addListener(function (msg) {
+        port.onMessage.addListener((msg) => {
 
             console.log('onMessage:');
             console.log(msg);
@@ -51,7 +51,7 @@ function handleRuntimeConnnection() {
             if (msg.action == 'getAllQuicoBookmarks') {
 
                 //获取所有 Quico 书签
-                getQuicoBookmarks(function (results, quicoBookmarksRootNodeId) {
+                getQuicoBookmarks((results, quicoBookmarksRootNodeId) => {
                     port.postMessage({
                         action: 'getAllQuicoBookmarks',
                         bookmarks: results,
@@ -64,7 +64,7 @@ function handleRuntimeConnnection() {
 
 
         //onDisconnect 响应连接断开
-        port.onDisconnect.addListener(function (msg) {
+        port.onDisconnect.addListener((msg) => {
             //标记连接断开
             port.isDisconnected = true;
         });
@@ -77,8 +77,8 @@ function handleRuntimeConnnection() {
 function listenTabChange() {
     //监听标签变化
     //https://developer.chrome.com/extensions/tabs#event-onActivated
-    chrome.tabs.onActivated.addListener(function (activeInfo) {
-        chrome.tabs.get(activeInfo.tabId, function (tab) {
+    chrome.tabs.onActivated.addListener((activeInfo) => {
+        chrome.tabs.get(activeInfo.tabId, (tab)=> {
             //console.log(tab);
 
             //忽略非页面链接
@@ -93,7 +93,7 @@ function listenTabChange() {
             let latestTab = getLatestTab();
 
             //广播更新
-            getAlivePortsToMain().forEach(function (port) {
+            getAlivePortsToMain().forEach((port) => {
 
                 //发送 url 更新信息
                 port.postMessage({
@@ -112,7 +112,7 @@ function listenBookmarksChange() {
     //通知 main 面板
     function notifyMainPorts() {
         //广播更新
-        getAlivePortsToMain().forEach(function (port) {
+        getAlivePortsToMain().forEach((port) => {
             //发送 url 更新信息
             port.postMessage({
                 action: 'bookmarksUpdated'
@@ -141,7 +141,7 @@ function getAlivePortsToMain() {
 
 
     //删除已断开的链接
-    portsToMain = portsToMain.filter(function (port) {
+    portsToMain = portsToMain.filter((port)=> {
         //检查连接是否已断开
         return !port.isDisconnected;
     });
@@ -185,14 +185,14 @@ function saveLatestTab(tab) {
  */
 function getQuicoBookmarks(callback) {
     //查询标签
-    chrome.bookmarks.search('Quico Bookmarks', function (bookmarkTreeNodes) {
+    chrome.bookmarks.search('Quico Bookmarks', (bookmarkTreeNodes)=> {
 
         //若未找到则创建
         if (bookmarkTreeNodes == undefined || bookmarkTreeNodes.length == 0) {
             //创建, 模拟在'其他书签'(other bookmarks)文件夹中创建
             chrome.bookmarks.create({
                 title: 'Quico Bookmarks'
-            }, function (result) {
+            }, (result) => {
                 //创建后再次尝试获取 Quico Bookmarks 下所有书签
                 getQuicoBookmarks(callback);
             })
@@ -200,7 +200,7 @@ function getQuicoBookmarks(callback) {
 
             //获取 Quico Bookmarks 下所有书签
             let quicoBookmarksRootNodeId = bookmarkTreeNodes[0].id;
-            chrome.bookmarks.getSubTree(quicoBookmarksRootNodeId, function (results) {
+            chrome.bookmarks.getSubTree(quicoBookmarksRootNodeId, (results)=> {
 
                 //cb
                 callback(results[0], quicoBookmarksRootNodeId);
@@ -212,7 +212,7 @@ function getQuicoBookmarks(callback) {
 
 //监听插件安装事件
 //https://developer.chrome.com/extensions/runtime#event-onInstalled
-chrome.runtime.onInstalled.addListener(function () {
+chrome.runtime.onInstalled.addListener(() => {
     //用新标签打开主面板页
     chrome.tabs.create({
         url: 'html/main.html?url=' + encodeURIComponent('http://www.domain.com/index?author=BowenLiang&extension=Quico#efficiencyFirst')
@@ -221,21 +221,21 @@ chrome.runtime.onInstalled.addListener(function () {
 
 //添加右键菜单
 chrome.contextMenus.create({
-    title: 'get QR code',
-    onclick: function (info, tab) {
+    title: 'Generate QR code',
+    onclick: (info, tab) => {
 
         //用新标签打开主面板页
         chrome.tabs.create({
             url: 'html/main.html?url=' + encodeURIComponent(tab.url)
         });
     }
-}, function () {
+}, () => {
 });
 
 
 //添加 omnibox 命令响应
 //https://developer.chrome.com/extensions/omnibox#event-onInputEntered
-chrome.omnibox.onInputEntered.addListener(function (text, disposition) {
+chrome.omnibox.onInputEntered.addListener((text, disposition) => {
     //用新标签打开主面板页
     chrome.tabs.create({
         url: 'html/main.html?url=' + encodeURIComponent(text)

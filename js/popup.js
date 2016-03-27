@@ -6,11 +6,11 @@
 console.log('popup.js');
 
 //变量
-var qrcodeElement;
-var currentUrl; //当前页面 URL
+let qrcodeElement;
+let currentUrl; //当前页面 URL
 
 //获取当前窗口URL
-chrome.tabs.query({active: true, currentWindow: true}, function (tabArray) {
+chrome.tabs.query({active: true, currentWindow: true}, (tabArray) => {
 
     currentUrl = tabArray[0].url;
 
@@ -32,8 +32,8 @@ function displayQrcode(url) {
 }
 
 //按钮事件 - 主页面按钮
-var qrcodeDiv = document.getElementById("qrcode");
-qrcodeDiv.addEventListener('click', function (event) {
+let qrcodeDiv = document.getElementById("qrcode");
+qrcodeDiv.addEventListener('click', (event) => {
     event.preventDefault();
 
     //用新标签打开主面板页
@@ -45,7 +45,7 @@ qrcodeDiv.addEventListener('click', function (event) {
 
 //按钮事件 - 主页面按钮
 let mainBtn = document.getElementById("btn-main");
-mainBtn.addEventListener('click', function (event) {
+mainBtn.addEventListener('click', (event) => {
     event.preventDefault();
 
     //用新标签打开主面板页
@@ -57,7 +57,7 @@ mainBtn.addEventListener('click', function (event) {
 
 //按钮事件 - 点击下载按钮
 let downloadBtn = document.getElementById("btn-download");
-downloadBtn.addEventListener('click', function (event) {
+downloadBtn.addEventListener('click', (event)=> {
     event.preventDefault();
 
     let canvas = $('#qrcode canvas').get(0);
