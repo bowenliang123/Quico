@@ -72,7 +72,7 @@ gulp.task('build', ['clean', 'copy', 'zip']);
 gulp.task('default', ['build']);
 
 // Watch
-gulp.task('watch', () => {
+gulp.task('watch', ['build'], () => {
     gulp.watch([
         //项目依赖单个文件
         'manifest.json',
