@@ -52,10 +52,15 @@ textarea {
 
 /*主二维码*/
 .qrImgContainer {
-    max-width: 80%;
+
 }
 
 .qrImgContainer img {
+    max-width: 80%;
+    margin: 15px 10%;
+    padding: 5px;
+    border: lightgrey solid 1px;
+    border-radius: 3%;
 }
 
 /*快捷按钮*/
@@ -126,6 +131,6 @@ textarea {
     font-size: 14px;
 }
 
-.mainFooter iframe{
+.mainFooter iframe {
     margin: 0 0 0 5px;
 }
