@@ -14,7 +14,7 @@ let getYYYYMMDDHHMM = function () {
 };
 
 // 复制必要的文件
-gulp.task('copyBower', ['clean'], function () {
+gulp.task('copyBower', ['clean'],()=>{
     return gulp.src([
             //angular
             'bower_components/angular/angular.min.js',
@@ -36,7 +36,7 @@ gulp.task('copyBower', ['clean'], function () {
 });
 
 // 复制必要的文件
-gulp.task('copy', ['clean', 'copyBower'], function () {
+gulp.task('copy', ['clean', 'copyBower'],()=>{
     return gulp.src([
             'manifest.json',
             'html/*',
@@ -50,7 +50,7 @@ gulp.task('copy', ['clean', 'copyBower'], function () {
 
 
 // Clean
-gulp.task('clean', function () {
+gulp.task('clean', () => {
     return gulp.src([
             'dist/',
             'releases/'
@@ -59,7 +59,7 @@ gulp.task('clean', function () {
 });
 
 // zip
-gulp.task('zip', ['clean', 'copy'], function () {
+gulp.task('zip', ['clean', 'copy'],()=>{
     return gulp.src('dist/**/*', {"base": "."})
         .pipe(zip('quico-' + getYYYYMMDDHHMM() + '.zip'))
         .pipe(gulp.dest('releases'));
@@ -67,22 +67,25 @@ gulp.task('zip', ['clean', 'copy'], function () {
 
 
 // Build
-gulp.task('build', ['clean', 'copy', 'zip'], function () {
-});
+gulp.task('build', ['clean', 'copy', 'zip']);
 
 // Default
-gulp.task('default', ['build'], function () {
-});
+gulp.task('default', ['build']);
 
 // Watch
-gulp.task('watch', function () {
+gulp.task('watch', () => {
     gulp.watch([
+        //项目依赖单个文件
         'manifest.json',
         'gulpfile.js',
-        'js/**/*',
+
+        //应用逻辑
         'css/**/*',
         'html/**/*',
         'img/**/*',
+        'js/**/*',
+
+        //依赖库
         'bower_components/**/*',
     ], ['build']);
 });
