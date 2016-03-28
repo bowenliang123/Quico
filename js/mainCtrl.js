@@ -17,6 +17,8 @@ angular.module('mainCtrl', [])
             base64img: ''
         };
 
+        $scope.extensionVersion = chrome.app.getDetails().version;  //chrome 扩展版本
+
 
         var qrcode;
         var port;
