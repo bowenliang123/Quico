@@ -186,42 +186,42 @@
             </div>
 
             <!--快捷按钮-->
-            <div>
-
-                <!--新页面打开按钮-->
-                <a href="{{currentUrl}}" target="_blank">
-                    <button type="button" class="btn btn-sm btn-success p-a-0 quickButton ">
+            <div class="row">
+                <div class="col-sm-6">
+                    <!--新页面打开按钮-->
+                    <a href="{{currentUrl}}" target="_blank"
+                       class="btn btn-sm btn-block btn-success p-a-0 quickButton ">
                         <i class="fa fa-arrow-right"></i>
                         Goto
+                        </button>
+                    </a>
+                    
+                    <!--清空按钮-->
+                    <button type="button" class="btn btn-sm btn-block btn-danger p-a-0 quickButton"
+                            ng-click="onClickClear()">
+                        <i class="fa fa-times"></i>
+                        Clear
                     </button>
-                </a>
+                </div>
 
-                <!--清空按钮-->
-                <button type="button" class="btn btn-sm btn-danger p-a-0 quickButton"
-                        ng-click="onClickClear()">
-                    <i class="fa fa-times"></i>
-                    Clear
-                </button>
+                <div class="col-sm-6">
+                    <!--上传二维码按钮-->
+                    <button type="button" class="btn btn-sm btn-block btn-warning p-a-0 quickButton"
+                            ng-click="onClickUploadBtn()">
+                        <i class="fa fa-arrow-up"></i>
+                        Upload
+                    </button>
+
+                    <!--下载二维码按钮-->
+                    <button type="button" class="btn btn-sm btn-block btn-primary p-a-0 quickButton "
+                            ng-click="onClickDownloadBtn()">
+                        <i class="fa fa-arrow-down"></i>
+                        Download
+                    </button>
+                </div>
+
 
             </div>
-
-            <div>
-                <!--下载二维码按钮-->
-                <button type="button" class="btn btn-sm btn-primary p-a-0 quickButton "
-                        ng-click="onClickDownloadBtn()">
-                    <i class="fa fa-arrow-down"></i>
-                    Download
-                </button>
-
-
-                <!--上传二维码按钮-->
-                <button type="button" class="btn btn-sm btn-warning p-a-0 quickButton"
-                        ng-click="onClickUploadBtn()">
-                    <i class="fa fa-arrow-up"></i>
-                    Upload
-                </button>
-            </div>
-
 
             <!--最近 URL-->
             <div class="recentUrlsContainer">
