@@ -5,16 +5,15 @@ const gulp = require('gulp'),
     clean = require('gulp-clean'),
     zip = require('gulp-zip');
 
-let getYYYYMMDDHHMM = function () {
-    let toXX = function (input) {
-        return (input < 10) ? ('0' + input) : input;
-    };
+let getYYYYMMDDHHMM = () => {
+    let toXX = (input) => ((input < 10) ? ('0' + input) : input);
+
     let date = new Date();
     return `${date.getFullYear()}${toXX(date.getMonth() + 1)}${toXX(date.getDate())}${toXX(date.getHours())}${toXX(date.getMinutes())}`;
 };
 
 // 复制必要的文件
-gulp.task('copyBower', ['clean'],()=>{
+gulp.task('copyBower', ['clean'], ()=> {
     return gulp.src([
             //angular
             'bower_components/angular/angular.min.js',
@@ -36,7 +35,7 @@ gulp.task('copyBower', ['clean'],()=>{
 });
 
 // 复制必要的文件
-gulp.task('copy', ['clean', 'copyBower'],()=>{
+gulp.task('copy', ['clean', 'copyBower'], ()=> {
     return gulp.src([
             'manifest.json',
             'html/*',
@@ -59,7 +58,7 @@ gulp.task('clean', () => {
 });
 
 // zip
-gulp.task('zip', ['clean', 'copy'],()=>{
+gulp.task('zip', ['clean', 'copy'], ()=> {
     return gulp.src('dist/**/*', {"base": "."})
         .pipe(zip('quico-' + getYYYYMMDDHHMM() + '.zip'))
         .pipe(gulp.dest('releases'));
