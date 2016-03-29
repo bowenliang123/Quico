@@ -126,7 +126,7 @@ angular.module('mainCtrl', [])
                     let tab = msg.tab;
 
                     //忽略非页面链接
-                    if (!tab.url.match(/^http/i)) {
+                    if (!tab || !tab.url || !tab.url.match(/^http/i)) {
                         return;
                     }
 
