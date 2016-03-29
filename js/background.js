@@ -166,7 +166,7 @@ function getLatestTab() {
 }
 
 /**
- * 存储最新 tab 到 localstorage
+ * 存储最新 tab 到 localStorage
  * @param tab
  */
 function saveLatestTab(tab) {
@@ -212,12 +212,12 @@ function getQuicoBookmarks(callback) {
 
 //监听插件安装事件
 //https://developer.chrome.com/extensions/runtime#event-onInstalled
-chrome.runtime.onInstalled.addListener(() => {
-    //用新标签打开主面板页
-    chrome.tabs.create({
-        url: 'html/main.html?url=' + encodeURIComponent('http://www.domain.com/index?author=BowenLiang&extension=Quico#efficiencyFirst')
-    });
-});
+//chrome.runtime.onInstalled.addListener(() => {
+//    //用新标签打开主面板页
+//    chrome.tabs.create({
+//        url: 'html/main.html?url=' + encodeURIComponent('http://www.domain.com/index?author=BowenLiang&extension=Quico#efficiencyFirst')
+//    });
+//});
 
 //添加右键菜单
 chrome.contextMenus.create({
