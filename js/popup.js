@@ -9,13 +9,15 @@ console.log('popup.js');
 let qrcodeElement;
 let currentUrl; //当前页面 URL
 
+let qrcode;
+
 //获取当前窗口URL
 chrome.tabs.query({active: true, currentWindow: true}, (tabArray) => {
 
     currentUrl = tabArray[0].url;
 
     //生成二维码显示到canvas
-    displayQrcode(currentUrl);
+    document.getElementById('qrcodeImage').src = displayQrcode2(currentUrl);
 });
 
 
@@ -29,6 +31,23 @@ function displayQrcode(url) {
     }
 
     qrcodeElement.makeCode(url);
+}
+
+/**
+ * 生成并渲染二维码
+ * @param url
+ */
+function displayQrcode2(url) {
+    if (qrcode == undefined) {
+        qrcode = initQrcodeGenerator('qrcode', 200);
+    }
+
+    //重绘
+    qrcode.makeCode(url);
+
+    let canvas = document.getElementsByTagName('canvas')[0];
+    let base64QrImg = canvas.toDataURL();
+    return base64QrImg;
 }
 
 //按钮事件 - 主页面按钮
@@ -60,7 +79,7 @@ let downloadBtn = document.getElementById("btn-download");
 downloadBtn.addEventListener('click', (event)=> {
     event.preventDefault();
 
-    let canvas = $('#qrcode canvas').get(0);
+    let canvas = document.getElementsByTagName('canvas')[0];
     let base64QrImg = canvas.toDataURL();
     invokeDownloadQrImgFile(currentUrl, base64QrImg);
 });

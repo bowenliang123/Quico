@@ -1,3 +1,33 @@
-#qrcode:hover {
+#qrcodeImage {
+    width: 200px;
+    border: 1px solid lightgrey;
+    border-radius: 5%;
+    padding: 7px;
+}
+
+#qrcodeImage:hover {
     cursor: pointer;
+}
+
+.buttons {
+    text-align: center;
+    /*font-weight: bold;*/
+    font-size: 1.2em;
+    margin: 8px;
+    padding: 8px;
+}
+
+.buttons:hover {
+    cursor: pointer;
+    /*text-decoration: underline;*/
+    border: 1px solid lightgrey;
+    padding: 7px;
+}
+
+#btn-main {
+    color: #0099CC;
+}
+
+#btn-download {
+    color: #336633;
 }

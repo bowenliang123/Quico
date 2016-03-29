@@ -4,42 +4,35 @@
     <meta charset="UTF-8">
     <title>Popup</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
-
     <!--fontawesome css-->
     <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
 
     <!--app css-->
     <link rel="stylesheet" href="../css/popup.css">
 
-    <!-- jQuery first, then Bootstrap JS. -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <!--<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
-
     <!--lib js-->
     <script src="../bower_components/qrcode.js/qrcode.js"></script>
 
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div id="qrcode" class="center-block m-a-1"></div>
-    </div>
-    <div class="row">
-        <button id="btn-main" class="btn btn-block btn-sm btn-link text-primary font-weight-bold">
-            <i class="fa fa-paper-plane"></i>
-            Quico Main Tab
-        </button>
-    </div>
-    <div class="row">
-        <button id="btn-download" class="btn btn-block btn-sm btn-link text-success font-weight-bold">
-            <i class="fa fa-download"></i>
-            Download QRCode
-        </button>
-    </div>
+
+<!--qr code image-->
+<div>
+    <img id="qrcodeImage">
 </div>
-<div tabindex="1"></div>
+
+<!--buttons-->
+<div id="btn-main" class="buttons">
+    <i class="fa fa-paper-plane"></i>
+    Edit in Quico
+</div>
+<div id="btn-download" class="buttons">
+    <i class="fa fa-download"></i>
+    Download QRCode
+</div>
+
+<div tabindex="1" hidden></div>
+<div id="qrcode" class="" hidden></div>
 </body>
 
 <!--app-->
