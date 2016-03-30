@@ -69,7 +69,7 @@ gulp.task('zip', ['clean', 'copy'], ()=> {
 gulp.task('build', ['clean', 'copy', 'zip']);
 
 // Default
-gulp.task('default', ['build']);
+gulp.task('default', ['watch']);
 
 // Watch
 gulp.task('watch', ['build'], () => {
