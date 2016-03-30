@@ -11,27 +11,20 @@ let currentUrl; //当前页面 URL
 
 let qrcode;
 
-//获取当前窗口URL
-chrome.tabs.query({active: true, currentWindow: true}, (tabArray) => {
 
-    currentUrl = tabArray[0].url;
+initPopup();
 
-    //生成二维码显示到canvas
-    document.getElementById('qrcodeImage').src = displayQrcode2(currentUrl);
-});
+function initPopup() {
+    //获取当前窗口URL
+    chrome.tabs.query({active: true, currentWindow: true}, (tabArray) => {
 
+        currentUrl = tabArray[0].url;
 
-/**
- * 生成并显示二维码
- * @param url
- */
-function displayQrcode(url) {
-    if (qrcodeElement == undefined) {
-        qrcodeElement = initQrcodeGenerator('qrcode', 200);
-    }
-
-    qrcodeElement.makeCode(url);
+        //生成二维码显示到canvas
+        document.getElementById('qrcodeImage').src = displayQrcode2(currentUrl);
+    });
 }
+
 
 /**
  * 生成并渲染二维码
@@ -39,7 +32,7 @@ function displayQrcode(url) {
  */
 function displayQrcode2(url) {
     if (qrcode == undefined) {
-        qrcode = initQrcodeGenerator('qrcode', 200);
+        qrcode = initQrcodeGenerator('qrcode', 500);
     }
 
     //重绘
@@ -51,7 +44,7 @@ function displayQrcode2(url) {
 }
 
 //按钮事件 - 主页面按钮
-let qrcodeDiv = document.getElementById("qrcode");
+let qrcodeDiv = document.getElementById("qrcodeImage");
 qrcodeDiv.addEventListener('click', (event) => {
     event.preventDefault();
 
