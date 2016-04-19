@@ -111,7 +111,10 @@
         <div class="col-sm-6 m-y-1">
             <form>
                 <div class="form-group row">
-                    <label for="texteraFullUrl" class="col-sm-1 form-control-label">URL</label>
+                    <label for="texteraFullUrl" class="col-sm-1 form-control-label">
+                        URL
+                        <small class="text-muted" ng-if="currentUrl.length>0">Len:{{currentUrl.length}}</small>
+                    </label>
                     <div class="col-sm-11">
                         <textarea id="texteraFullUrl" class="form-control" rows="4"
                                   ng-model="currentUrl" ng-change="onChangeUrlTexteara()">
