@@ -74,7 +74,7 @@
                 </a>
                 <div class="media-body">
                     <h3 class="media-heading font-weight-bold">Quico 快码</h3>
-                    <p class="font-weight-bold font-italic">Productive QR code toolkit</p>
+                    <p class="font-weight-bold font-italic">次世代二维码工具</p>
                 </div>
             </div>
 
@@ -83,7 +83,7 @@
                      ng-click="openQuicoBookmarksInNewTab()">
                     <div>
                         <i class="fa fa-bookmark"></i>
-                        Quico Bookmarks
+                        Quico 收藏夹
                     </div>
                     <div>
                         (chrome://bookmarks/#{{bookmarksRootId}})
@@ -93,8 +93,8 @@
 
             <div class="bookmarks">
                 <div class="text-sm-center text-muted font-italic" ng-if="bookmarks.length==0">
-                    <div>No bookmarks yet.</div>
-                    <div>Put some here.</div>
+                    <div>还没有书签,</div>
+                    <div>从上面的按钮进入添加。</div>
                 </div>
                 <div ng-if="bookmarks.length>0"
                      ng-repeat="bookmark in bookmarks" ng-click="onClickRecentUrls(bookmark.url)"
@@ -240,7 +240,7 @@
                 <!--caption-->
                 <div class="caption">
                     <i class="fa fa-rocket"></i>
-                    Recent URLs
+                    最近的URL
                 </div>
 
                 <!--recentUrl List-->
@@ -288,7 +288,7 @@
 
         <!--Github 项目页面-->
         <a type="button" class="btn btn-secondary btn-link"
-           href="http://bowenliang123.github.io/Quico/" target="_blank">
+           href="https://github.com/bowenliang123/Quico" target="_blank">
             <i class="fa fa-github"></i>
             On Github
         </a>
