@@ -66,13 +66,13 @@ gulp.task('zip', ['clean', 'copy'], ()=> {
 
 
 // Build
-gulp.task('build', ['clean', 'copy', 'zip']);
+gulp.task('build', ['clean', 'copy']);
 
 // Default
-gulp.task('default', ['watch']);
+gulp.task('default', ['dev']);
 
-// Watch
-gulp.task('watch', ['build'], () => {
+// dev
+gulp.task('dev', ['build'], () => {
     gulp.watch([
         //项目依赖单个文件
         'manifest.json',
