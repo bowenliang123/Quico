@@ -17,7 +17,8 @@ angular.module('mainCtrl', [])
             base64img: ''
         };
 
-        $scope.extensionVersion = chrome.app.getDetails().version;  //chrome 扩展版本
+        //获取chrome插件版本号
+        $scope.extensionVersion = chrome.app.getDetails().version;
 
 
         var qrcode;

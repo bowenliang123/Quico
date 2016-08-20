@@ -1,5 +1,5 @@
-/*URL 文本框样式*/
-textarea {
+/*完整URL 文本框样式*/
+textarea#texteraFullUrl {
     box-sizing: border-box;
     font-size: 18px;
     font-weight: bold;

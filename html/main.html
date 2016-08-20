@@ -118,7 +118,6 @@
                     <div class="col-sm-11">
                         <textarea id="texteraFullUrl" class="form-control" rows="4"
                                   ng-model="currentUrl" ng-change="onChangeUrlTexteara()">
-
                         </textarea>
                     </div>
                 </div>
@@ -128,7 +127,7 @@
                 <div class="form-group row">
                     <label for="inputDomain" class="col-sm-1 form-control-label">Base</label>
                     <div class="col-sm-11">
-                        <input type="text" class="form-control form-control-sm" id="inputDomain"
+                        <input type="text" class="form-control form-control-sm text-danger" id="inputDomain"
                                placeholder="http://domain.com"
                                ng-model="currentBase" ng-change="onChangeUrlDetails()">
                     </div>
@@ -137,8 +136,9 @@
                 <div class="form-group row">
                     <label for="inputPath" class="col-sm-1 form-control-label">Path</label>
                     <div class="col-sm-11">
-                        <input type="text" class="form-control form-control-sm" id="inputPath" placeholder="/path"
-                               ng-model="currentPath" ng-change="onChangeUrlDetails()">
+                        <textarea id="inputPath" class="form-control text-breakall text-primary" rows="2"
+                                  ng-model="currentPath" ng-change="onChangeUrlDetails()">
+                        </textarea>
                     </div>
                 </div>
 
@@ -147,9 +147,13 @@
                     <div class="col-sm-11">
                         <div class="input-group">
                             <div class="input-group-addon">?</div>
-                            <input type="text" class="form-control form-control-sm" id="inputQuery"
-                                   placeholder="key=value"
-                                   ng-model="currentQuery" ng-change="onChangeUrlDetails()">
+                            <!--<input type="text" class="form-control form-control-sm" id="inputQuery"-->
+                                   <!--placeholder="key=value"-->
+                                   <!--ng-model="currentQuery" ng-change="onChangeUrlDetails()">-->
+
+                            <textarea id="inputQuery" class="form-control text-breakall text-success" rows="2" placeholder="key=value"
+                                      ng-model="currentQuery" ng-change="onChangeUrlDetails()">
+                        </textarea>
                         </div>
                     </div>
                 </div>
