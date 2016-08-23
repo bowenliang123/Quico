@@ -113,7 +113,7 @@
         <div class="col-sm-6 m-y-1">
             <form>
                 <div class="form-group row">
-                    <label for="texteraFullUrl" class="col-sm-1 form-control-label">
+                    <label for="texteraFullUrl" class="col-sm-1 form-control-label text-muted">
                         URL
                         <small class="text-muted" ng-if="currentUrl.length>0">Len:{{currentUrl.length}}</small>
                     </label>
@@ -127,7 +127,7 @@
                 <hr>
 
                 <div class="form-group row">
-                    <label for="inputDomain" class="col-sm-1 form-control-label">Base</label>
+                    <label for="inputDomain" class="col-sm-1 form-control-label text-muted">Base</label>
                     <div class="col-sm-11">
                         <input type="text" class="form-control text-danger" id="inputDomain"
                                placeholder="http://domain.com"
@@ -136,7 +136,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputPath" class="col-sm-1 form-control-label">Path</label>
+                    <label for="inputPath" class="col-sm-1 form-control-label text-muted">Path</label>
                     <div class="col-sm-11">
                         <textarea id="inputPath" class="form-control text-breakall text-danger" rows="2"
                                   ng-model="currentPath" ng-change="onChangeUrlDetails()">
@@ -145,7 +145,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputQuery" class="col-sm-1 form-control-label">Query</label>
+                    <label for="inputQuery" class="col-sm-1 form-control-label text-muted">Query</label>
                     <div class="col-sm-11">
                         <div class="input-group">
                             <div class="input-group-addon">?</div>
@@ -161,7 +161,7 @@
                 </div>
 
                 <div class="form-group row" ng-repeat="param in currentParams">
-                    <label for="inputParam{{$index}}" class="col-sm-1 form-control-label">Param</label>
+                    <label for="inputParam{{$index}}" class="col-sm-1 form-control-label text-muted">Param</label>
                     <div class="col-sm-3 p-r-0">
                         <div class="input-group">
                             <input type="text" class="form-control form-control-sm text-primary" id="inputParam{{$index}}"
@@ -181,7 +181,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputHash" class="col-sm-1 form-control-label">Hash</label>
+                    <label for="inputHash" class="col-sm-1 form-control-label text-muted">Hash</label>
                     <div class="col-sm-11">
                         <div class="input-group">
                             <div class="input-group-addon">#</div>
