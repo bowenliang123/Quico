@@ -208,7 +208,7 @@
                     <a href="{{currentUrl}}" target="_blank"
                        class="btn btn-sm btn-block btn-success p-a-0 quickButton ">
                         <i class="fa fa-arrow-right"></i>
-                        Goto
+                        访问
                         </button>
                     </a>
 
@@ -216,7 +216,7 @@
                     <button type="button" class="btn btn-sm btn-block btn-danger p-a-0 quickButton"
                             ng-click="onClickClear()">
                         <i class="fa fa-times"></i>
-                        Clear
+                        清空
                     </button>
                 </div>
 
@@ -225,14 +225,14 @@
                     <button type="button" class="btn btn-sm btn-block btn-warning p-a-0 quickButton"
                             ng-click="onClickUploadBtn()">
                         <i class="fa fa-arrow-up"></i>
-                        Upload
+                        上传二维码
                     </button>
 
                     <!--下载二维码按钮-->
                     <button type="button" class="btn btn-sm btn-block btn-primary p-a-0 quickButton "
                             ng-click="onClickDownloadBtn()">
                         <i class="fa fa-arrow-down"></i>
-                        Download
+                        下载二维码
                     </button>
                 </div>
 
@@ -302,6 +302,9 @@
 <!--hidden-->
 <div hidden>
     <input type="file" id="uploadInput" accept="image/*">
+
+    <!--用于绘制下载二维码的canvas-->
+    <canvas width="600px" height="280px" id="downloadCanvas"></canvas>
 </div>
 
 </body>

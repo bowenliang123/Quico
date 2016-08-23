@@ -178,7 +178,7 @@ angular.module('mainCtrl', [])
          */
         function displayQrcode(url) {
             if (qrcode == undefined) {
-                qrcode = initQrcodeGenerator('qrcode', 500);
+                qrcode = initQrcodeGenerator('qrcode', 250);
             }
 
             //重绘

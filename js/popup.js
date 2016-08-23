@@ -32,7 +32,7 @@ function initPopup() {
  */
 function displayQrcode2(url) {
     if (qrcode == undefined) {
-        qrcode = initQrcodeGenerator('qrcode', 500);
+        qrcode = initQrcodeGenerator('qrcode', 250);
     }
 
     //重绘

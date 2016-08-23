@@ -43,21 +43,57 @@ function initQrcodeGenerator(elementId, side) {
  * @param base64img
  */
 function invokeDownloadQrImgFile(url, base64img) {
-    //初始化链接
-    let downloadLink = document.createElement("a");
 
-    //用 base64 生成 url
-    downloadLink.href = base64img.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+    //准备canvas画布
+    let canvas = document.getElementById('downloadCanvas');
+    let ctx = canvas.getContext("2d");
+    let image = new Image();
 
-    //文件名
-    downloadLink.download = `Quico ${url}.png`;
+    image.onload = function () {
+        //渲染背景颜色
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0, 0, 600, 280);
 
-    //加入到文档中
-    document.body.appendChild(downloadLink);
+        //渲染二维码
+        let imageMargin=15;
+        ctx.drawImage(image, imageMargin, imageMargin);
 
-    //下载
-    downloadLink.click();
+        //渲染网址
+        ctx.fillStyle = "#0066ff";      //文本颜色
+        let fontPxSize = 20;
+        ctx.font = fontPxSize + "px monospace";      //文本字体
+        let textX = 280;
+        let textY = imageMargin+fontPxSize;
+        let textMaxWidth = 320 - fontPxSize;
+        let index = 0;
+        let len = 25;
+        while (index < url.length) {
+            let end = index + len;
+            let text = url.substr(index, len);
+            ctx.fillText(text, textX, textY, textMaxWidth);  //渲染网址
+            textY = textY + 25;
+            index = end;
+        }
 
-    //清理
-    document.body.removeChild(downloadLink);
+        //初始化链接
+        let downloadLink = document.createElement("a");
+
+        //用 base64 生成 url
+        downloadLink.href = canvas.toDataURL().replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+
+        //文件名
+        downloadLink.download = `Quico ${url}.png`;
+
+        //加入到文档中
+        document.body.appendChild(downloadLink);
+
+        //下载
+        downloadLink.click();
+
+        //清理
+        document.body.removeChild(downloadLink);
+    };
+    image.src = base64img;
+
+
 }
