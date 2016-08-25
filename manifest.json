@@ -1,6 +1,6 @@
 {
   "name": "Quico 快码 QR Code Generator 二维码生成器插件",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Productive QR Code Generator with efficiency and elegance, just feeling it on the fly. More than a QR code generator.快码二维,疾行如风。",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",

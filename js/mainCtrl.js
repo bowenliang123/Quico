@@ -134,6 +134,7 @@ angular.module('mainCtrl', [])
                     //更新二维码
                     let base64QrImg = displayQrcode(tab.url);
                     $scope.qrCodeList.unshift({url: tab.url, title: tab.title, base64QrImg: base64QrImg});
+                    $scope.qrCodeList=$scope.qrCodeList.slice(0,10);
                     $scope.$apply();
                 }
 
