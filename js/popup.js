@@ -76,3 +76,14 @@ downloadBtn.addEventListener('click', (event)=> {
     let base64QrImg = canvas.toDataURL();
     invokeDownloadQrImgFile(currentUrl, base64QrImg);
 });
+
+//按钮事件 - 点击快捷按钮
+let downloadDeck = document.getElementById("btn-deck");
+downloadDeck.addEventListener('click', (event)=> {
+    event.preventDefault();
+
+    //用新标签打开快捷面板
+    chrome.tabs.create({
+        url: 'html/deck.html'
+    });
+});

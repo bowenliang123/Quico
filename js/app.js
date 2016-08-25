@@ -4,7 +4,8 @@
 'use strict';
 
 var app = angular.module('quicoApp', [
-    'mainCtrl'
+    'mainCtrl',
+    'deckCtrl',
 ]);
 
 app.config([

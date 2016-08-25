@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-app="quicoApp">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <title>Quico Deck 常用二维码</title>
+
+    <!--page icon-->
+    <link rel="icon" href="../img/icon.ico">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+    <!--fontawesome css-->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+
+    <!--app css-->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- jQuery first, then Bootstrap JS. -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+    <!-- angular v1 -->
+    <script src="../bower_components/angular/angular.min.js"></script>
+
+
+    <!--lib-->
+    <script src="../bower_components/qrcode.js/qrcode.js"></script>
+
+
+    <!--jsqrcode for decoding qr code image-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/grid.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/version.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/detector.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/formatinf.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/errorlevel.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/bitmat.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/datablock.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/bmparser.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/datamask.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/rsdecoder.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/gf256poly.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/gf256.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/decoder.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/qrcode.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/findpat.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/alignpat.js"></script>-->
+    <!--<script type="text/javascript" src="../js/jsqrcode-master/src/databr.js"></script>-->
+
+
+    <!--angular app-->
+    <script src="../js/app.js"></script>
+    <script src="../js/mainCtrl.js"></script>
+    <script src="../js/deckCtrl.js"></script>
+
+    <!--app-->
+    <script src="../js/util/qr_util.js"></script>
+    <script src="../js/util/url_util.js"></script>
+    <!--<script src="../js/track.js"></script>-->
+
+</head>
+
+<body ng-controller="deckCtrl">
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
+            <form>
+                <div class="form-group row">
+                    <!--<label for="inputUrls" class="col-sm-1 form-control-label text-muted">-->
+                    <!--URL-->
+                    <!--<small class="text-muted" ng-if="currentUrl.length>0">Len:{{currentUrl.length}}</small>-->
+                    <!--</label>-->
+                    <div class="col-sm-12">
+                        <textarea id="inputUrls" class="form-control text-breakall" rows="30"
+                                  ng-model="urls">
+                        </textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-sm-8">
+            <div class="row m-a-1">
+                <button class="btn btn-success btn-block" ng-click="parseAndDisplayUrls()">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    飞过来
+                </button>
+            </div>
+            <div class="row">
+                <div ng-repeat="showCase in resultCases" class="m-a-1">
+                    <a class="media" ng-href="{{showCase.url}}" target="_blank">
+                        <div class="media-left">
+                            <img class="media-object" ng-src="{{showCase.base64img}}" alt="Generic placeholder image">
+                        </div>
+                        <div class="media-body text-breakall">
+                            <small class="text-muted">#{{$index}}</small>
+                            <h6 class="media-heading">{{showCase.desc}} </h6>
+                            <p class="text-breakall">{{showCase.url}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
