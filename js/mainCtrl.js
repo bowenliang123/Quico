@@ -260,7 +260,7 @@ angular.module('mainCtrl', [])
         $scope.onClickDownloadBtn = ()=> {
             //触发下载二维码文件
             invokeDownloadQrImgFile($scope.currentUrl, $scope.currentCase.base64img);
-        }
+        };
 
 
         //鼠标点击 - 点击上传按钮
