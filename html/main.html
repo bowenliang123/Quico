@@ -71,17 +71,25 @@
         <!--左栏-->
         <div class="col-sm-3">
             <!--Icon and slogan-->
-            <div class="media m-t-1 slogan" ng-click="newTabToWebStorePage()">
+            <div class="media m-a-1 slogan" ng-click="newTabToWebStorePage()">
                 <a class="media-left" href="#">
                     <img class="media-object" src="../img/icon.ico" alt="Generic placeholder image">
                 </a>
                 <div class="media-body">
                     <h3 class="media-heading font-weight-bold">Quico 快码</h3>
-                    <p class="font-weight-bold font-italic">次世代二维码工具</p>
+                    <p class="font-weight-bold font-italic">次世代二维码生成器</p>
                 </div>
             </div>
 
-            <div class="m-t-1">
+            <div class="m-a-1">
+                <a class="btn btn-sm btn-primary btn-block text-breakall font-weight-bold"
+                   href="deck.html" target="_blank">
+                    <i class="fa fa-bolt"></i>
+                    常用二维码
+                </a>
+            </div>
+
+            <div class="m-a-1">
                 <div class="btn btn-sm btn-success btn-block text-breakall font-weight-bold"
                      ng-click="openQuicoBookmarksInNewTab()">
                     <div>
@@ -93,6 +101,7 @@
                     </div>
                 </div>
             </div>
+
 
             <div class="bookmarks">
                 <div class="text-sm-center text-muted font-italic" ng-if="bookmarks.length==0">
@@ -151,10 +160,11 @@
                         <div class="input-group">
                             <div class="input-group-addon">?</div>
                             <!--<input type="text" class="form-control form-control-sm" id="inputQuery"-->
-                                   <!--placeholder="key=value"-->
-                                   <!--ng-model="currentQuery" ng-change="onChangeUrlDetails()">-->
+                            <!--placeholder="key=value"-->
+                            <!--ng-model="currentQuery" ng-change="onChangeUrlDetails()">-->
 
-                            <textarea id="inputQuery" class="form-control text-breakall text-primary" rows="2" placeholder="key=value"
+                            <textarea id="inputQuery" class="form-control text-breakall text-primary" rows="2"
+                                      placeholder="key=value"
                                       ng-model="currentQuery" ng-change="onChangeUrlDetails()">
                         </textarea>
                         </div>
@@ -165,7 +175,8 @@
                     <label for="inputParam{{$index}}" class="col-sm-1 form-control-label text-muted">Param</label>
                     <div class="col-sm-3 p-r-0">
                         <div class="input-group">
-                            <input type="text" class="form-control form-control-sm text-primary" id="inputParam{{$index}}"
+                            <input type="text" class="form-control form-control-sm text-primary"
+                                   id="inputParam{{$index}}"
                                    placeholder="key"
                                    ng-model="param.key"
                                    ng-change="onChangeParams()">
@@ -174,7 +185,8 @@
                     </div>
 
                     <div class="col-sm-8 p-l-0">
-                        <input type="text" class="form-control form-control-sm text-primary" id="inputParam{{$index}}value"
+                        <input type="text" class="form-control form-control-sm text-primary"
+                               id="inputParam{{$index}}value"
                                placeholder="value"
                                ng-model="param.value"
                                ng-change="onChangeParams($index)">
