@@ -1,26 +1,25 @@
-Quico 快码 QR Code Generator 二维码生成器插件
-隐私政策 / Privacy Policy
+Quico - QR Code Generator Extension
+Privacy Policy
 
-最后更新 / Last Updated: 2026-09-01
+Last Updated: 2026-09-01
 
-本插件不收集任何个人数据。
 This extension does not collect any personal data.
 
-一、数据收集说明
-1. 本插件不会收集、记录或上传任何个人数据，包括但不限于：姓名、邮箱、地址、浏览历史、位置信息等。
-2. 本插件不包含任何统计、追踪或广告代码，不会向任何第三方服务器发送您的数据。
+1. Data Collection
+1.1 This extension does not collect, record, or upload any personal data, including but not limited to: name, email address, physical address, browsing history, or location information.
+1.2 This extension contains no analytics, tracking, or advertising code, and does not send your data to any third-party server.
 
-二、本地数据存储
-1. 本插件生成的二维码内容、常用二维码、最近生成记录等数据，仅保存在您的浏览器本地（通过 chrome.storage 实现），用于提供正常功能。
-2. 这些本地数据完全由您自己控制，您可以随时在插件设置中查看或清除，卸载插件后相关数据将被浏览器删除。
+2. Local Data Storage
+2.1 Data generated while using this extension, such as QR code content, saved QR codes, and recent generation history, is stored only locally in your browser (via chrome.storage) and is used solely to provide the extension's features.
+2.2 This local data is entirely under your control. You can view or clear it at any time in the extension settings, and it will be removed by the browser when the extension is uninstalled.
 
-三、权限使用说明
-本插件申请的权限仅用于实现核心功能：
-- tabs：读取当前标签页的网址和标题，用于生成二维码。
-- storage：在本地保存您的设置、常用二维码及最近记录。
-- bookmarks：在您主动选择时读取书签，用于生成书签对应的二维码。
-- contextMenus：提供右键菜单快捷操作。
+3. Permissions
+The permissions requested by this extension are used only to implement its core features:
+- tabs: Read the URL and title of the current tab to generate QR codes.
+- storage: Save your settings, saved QR codes, and recent history locally.
+- bookmarks: Read bookmarks only when you explicitly choose to, to generate QR codes from them.
+- contextMenus: Provide quick actions in the right-click context menu.
 
-四、其他
-1. 本插件不与任何外部服务器通信，不存在数据泄露风险。
-2. 如对本隐私政策有任何疑问，欢迎通过项目主页（GitHub）提交 Issue 与我们联系。
+4. Miscellaneous
+4.1 This extension does not communicate with any external server, so there is no risk of data leakage.
+4.2 If you have any questions about this privacy policy, please contact us by opening an issue on the project's GitHub page.
