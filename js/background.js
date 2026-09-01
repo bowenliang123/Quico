@@ -8,6 +8,12 @@ console.log('background.js');
 //main 页面连接
 var portsToMain = [];
 
+//chrome.storage 中的 key
+var latestTabKey = 'latestTab';
+
+//右键菜单 id
+var contextMenuId = 'quico-generate-qrcode';
+
 //初始化
 init();
 
@@ -23,6 +29,25 @@ function init() {
 
     //监听书签变化
     listenBookmarksChange();
+
+    //监听插件安装/更新事件 (service worker 每次唤醒都会执行顶层代码, 菜单只能在 onInstalled 中创建)
+    chrome.runtime.onInstalled.addListener(() => {
+        createContextMenu();
+    });
+}
+
+/**
+ * 创建右键菜单
+ * MV3 移除了 contextMenus.create 的 onclick 参数, 需配合 contextMenus.onClicked 事件使用
+ */
+function createContextMenu() {
+    chrome.contextMenus.create({
+        id: contextMenuId,
+        title: 'Generate QR code'
+    }, () => {
+        //忽略 chrome.runtime.lastError (菜单已存在时), 避免报错
+        void chrome.runtime.lastError;
+    });
 }
 
 function handleRuntimeConnnection() {
@@ -30,12 +55,18 @@ function handleRuntimeConnnection() {
     chrome.runtime.onConnect.addListener((port) => {
         //console.log(port);
 
-        let latestTab = getLatestTab();
         if (port.name == 'main') {
             //发送 url 更新信息
-            port.postMessage({
-                action: 'updateTab',
-                tab: latestTab
+            getLatestTab((latestTab) => {
+                //连接可能在读取完成前断开
+                if (port.isDisconnected) {
+                    return;
+                }
+
+                port.postMessage({
+                    action: 'updateTab',
+                    tab: latestTab
+                });
             });
 
             //加入到广播队列中
@@ -76,13 +107,13 @@ function handleRuntimeConnnection() {
  */
 function listenTabChange() {
     //监听标签变化
-    //https://developer.chrome.com/extensions/tabs#event-onActivated
+    //https://developer.chrome.com/docs/extensions/reference/api/tabs#event-onActivated
     chrome.tabs.onActivated.addListener((activeInfo) => {
         chrome.tabs.get(activeInfo.tabId, (tab)=> {
             //console.log(tab);
 
             //忽略非页面链接
-            if (!tab.url.match(/^http/i)) {
+            if (!tab.url || !tab.url.match(/^http/i)) {
                 return;
             }
 
@@ -90,15 +121,17 @@ function listenTabChange() {
             //更新 latestTab
             saveLatestTab(tab);
 
-            let latestTab = getLatestTab();
+            //读取 latestTab 后广播更新
+            getLatestTab((latestTab) => {
 
-            //广播更新
-            getAlivePortsToMain().forEach((port) => {
+                //广播更新
+                getAlivePortsToMain().forEach((port) => {
 
-                //发送 url 更新信息
-                port.postMessage({
-                    action: 'updateTab',
-                    tab: latestTab
+                    //发送 url 更新信息
+                    port.postMessage({
+                        action: 'updateTab',
+                        tab: latestTab
+                    });
                 });
             });
         });
@@ -151,22 +184,18 @@ function getAlivePortsToMain() {
 
 
 /**
- * 从 localstorage 读取最新 tab
- * @returns {undefined}
+ * 从 chrome.storage.local 读取最新 tab
+ * MV3 的 service worker 中没有 window/localStorage, 改用 chrome.storage
+ * @param callback
  */
-function getLatestTab() {
-    //读取 localstorage
-    let latestTabStr = window.localStorage.getItem('latestTab');
-    if (latestTabStr == undefined) {
-        return undefined;
-    }
-
-    //反序列化
-    return JSON.parse(latestTabStr);
+function getLatestTab(callback) {
+    chrome.storage.local.get(latestTabKey, (items) => {
+        callback(items ? items[latestTabKey] : undefined);
+    });
 }
 
 /**
- * 存储最新 tab 到 localStorage
+ * 存储最新 tab 到 chrome.storage.local
  * @param tab
  */
 function saveLatestTab(tab) {
@@ -174,8 +203,10 @@ function saveLatestTab(tab) {
         return;
     }
 
-    //序列化 tab 存入 localstorage
-    window.localStorage.setItem('latestTab', JSON.stringify(tab));
+    let obj = {};
+    obj[latestTabKey] = tab;
+
+    chrome.storage.local.set(obj);
 }
 
 
@@ -211,7 +242,7 @@ function getQuicoBookmarks(callback) {
 
 
 //监听插件安装事件
-//https://developer.chrome.com/extensions/runtime#event-onInstalled
+//https://developer.chrome.com/docs/extensions/reference/api/runtime#event-onInstalled
 //chrome.runtime.onInstalled.addListener(() => {
 //    //用新标签打开主面板页
 //    chrome.tabs.create({
@@ -219,22 +250,23 @@ function getQuicoBookmarks(callback) {
 //    });
 //});
 
-//添加右键菜单
-chrome.contextMenus.create({
-    title: 'Generate QR code',
-    onclick: (info, tab) => {
 
-        //用新标签打开主面板页
-        chrome.tabs.create({
-            url: 'html/main.html?url=' + encodeURIComponent(tab.url)
-        });
+//响应右键菜单点击
+//MV3 移除了 contextMenus.create 的 onclick 回调, 统一由 onClicked 事件处理
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+    if (info.menuItemId != contextMenuId || !tab || !tab.url) {
+        return;
     }
-}, () => {
+
+    //用新标签打开主面板页
+    chrome.tabs.create({
+        url: 'html/main.html?url=' + encodeURIComponent(tab.url)
+    });
 });
 
 
 //添加 omnibox 命令响应
-//https://developer.chrome.com/extensions/omnibox#event-onInputEntered
+//https://developer.chrome.com/docs/extensions/reference/api/omnibox#event-onInputEntered
 chrome.omnibox.onInputEntered.addListener((text, disposition) => {
     //用新标签打开主面板页
     chrome.tabs.create({

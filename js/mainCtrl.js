@@ -17,8 +17,8 @@ angular.module('mainCtrl', [])
             base64img: ''
         };
 
-        //获取chrome插件版本号
-        $scope.extensionVersion = chrome.app.getDetails().version;
+        //获取chrome插件版本号 (MV3 中 chrome.app.getDetails 已移除, 改用 runtime.getManifest)
+        $scope.extensionVersion = chrome.runtime.getManifest().version;
 
 
         var qrcode;
