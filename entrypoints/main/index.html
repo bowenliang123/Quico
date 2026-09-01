@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="manifest.type" content="page" />
+    <title>快码Quico 次世代生产力二维码工具</title>
+    <link rel="icon" href="/icon/48.png" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- 左栏: 入口与书签 -->
+      <aside class="sidebar">
+        <div class="card brand">
+          <img src="/icon/48.png" alt="Quico 快码" />
+          <div>
+            <h1>Quico 快码</h1>
+            <p class="text-muted">次世代二维码生成器</p>
+          </div>
+        </div>
+
+        <button id="btn-deck" class="btn btn-ghost btn-block" type="button">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
+          常用二维码
+        </button>
+
+        <button id="btn-bookmarks" class="btn btn-ghost btn-block" type="button">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" /></svg>
+          Quico 收藏夹
+        </button>
+        <div id="bookmarks-path" class="bookmarks-path text-muted text-break"></div>
+
+        <div id="bookmark-list" class="card bookmark-list"></div>
+        <div id="bookmark-empty" class="bookmark-empty text-muted" hidden>
+          还没有书签, 点击上方按钮进入添加。
+        </div>
+      </aside>
+
+      <!-- 中栏: URL 编辑 -->
+      <section class="editor">
+        <div class="card editor-card">
+          <label class="field">
+            <span class="field-label">URL <small id="url-len" class="text-muted"></small></span>
+            <textarea id="input-url" class="textarea mono" rows="4"
+                      placeholder="输入任意文本或 URL, 即时生成二维码"></textarea>
+          </label>
+
+          <hr />
+
+          <label class="field">
+            <span class="field-label">Base</span>
+            <input id="input-base" class="input mono text-danger" placeholder="http://domain.com" />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Path</span>
+            <textarea id="input-path" class="textarea mono text-danger text-break" rows="2"></textarea>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Query</span>
+            <textarea id="input-query" class="textarea mono text-accent text-break" rows="2" placeholder="key=value&key2=value2"></textarea>
+          </label>
+
+          <div class="field">
+            <span class="field-label">Params</span>
+            <div id="param-rows" class="param-rows"></div>
+          </div>
+
+          <label class="field">
+            <span class="field-label">Hash</span>
+            <input id="input-hash" class="input mono" />
+          </label>
+        </div>
+      </section>
+
+      <!-- 右栏: 二维码预览与最近 URL -->
+      <aside class="preview">
+        <div class="card qr-card">
+          <img id="qr-img" alt="二维码预览" />
+          <div id="qr-empty" class="text-muted" hidden>输入内容后生成二维码</div>
+        </div>
+
+        <div class="quick-grid">
+          <a id="btn-visit" class="btn btn-success" target="_blank" rel="noreferrer">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14" /><path d="M12 5l7 7-7 7" /></svg>
+            访问
+          </a>
+          <button id="btn-clear" class="btn btn-danger" type="button">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M18 6L6 18" /><path d="M6 6l12 12" /></svg>
+            清空
+          </button>
+          <button id="btn-upload" class="btn btn-warning" type="button">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="M17 8l-5-5-5 5" /><path d="M12 3v12" /></svg>
+            上传二维码
+          </button>
+          <button id="btn-download" class="btn btn-primary" type="button">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="M7 10l5 5 5-5" /><path d="M12 15V3" /></svg>
+            下载二维码
+          </button>
+        </div>
+
+        <div class="card recent">
+          <div class="recent-title text-muted">最近的 URL</div>
+          <div id="recent-list"></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="footer">
+      <span>Quico v<span id="version"></span> Powered by Bowen Liang © 2016</span>
+      <span class="footer-links">
+        <a href="https://chrome.google.com/webstore/detail/cobbkmppakjllmgndpfmejaflbjfehci" target="_blank" rel="noreferrer">Chrome Store</a>
+        <a href="https://github.com/bowenliang123/Quico" target="_blank" rel="noreferrer">GitHub</a>
+      </span>
+    </footer>
+
+    <input type="file" id="upload-input" accept="image/*" hidden />
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

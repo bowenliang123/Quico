@@ -1,15 +1,16 @@
 {
   "name": "quico",
-  "version": "1.0.0",
-  "description": "Productive QR code toolkit with efficiency and elegance, just feeling it on the fly. More than a QR code generator.快码二维,疾行如风.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "2.0.0",
+  "description": "Productive QR Code Generator with efficiency and elegance, just feeling it on the fly. More than a QR code generator.快码二维,疾行如风。",
+  "type": "module",
+  "private": true,
+  "author": "Bowen Liang",
+  "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://bowenliang123@bitbucket.org/bowenliang123/quico.git"
+    "url": "git+https://github.com/bowenliang123/Quico.git"
   },
+  "homepage": "https://github.com/bowenliang123/Quico#readme",
   "keywords": [
     "qrcode",
     "quico",
@@ -17,13 +18,25 @@
     "encode",
     "decode"
   ],
-  "author": "Bowen Liang",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/bowenliang123/quico#readme",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "compile": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "postinstall": "wxt prepare"
+  },
+  "dependencies": {
+    "jsqr": "^1.4.0",
+    "qrcode": "^1.5.4"
+  },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-clean": "^0.3.2",
-    "gulp-copy": "0.0.2",
-    "gulp-zip": "^3.2.0"
+    "@types/qrcode": "^1.5.6",
+    "typescript": "~5.9.0",
+    "vitest": "^4.1.11",
+    "wxt": "^0.21.4"
   }
 }

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="manifest.type" content="popup" />
+    <title>Quico 二维码生成器</title>
+    <link rel="icon" href="/icon/48.png" />
+  </head>
+  <body>
+    <main class="popup">
+      <img id="qr-img" class="qr-img" alt="当前页面二维码" title="点击在主面板中编辑" />
+      <div id="qr-tip" class="qr-tip card" hidden>当前页面无法生成二维码</div>
+
+      <div class="actions">
+        <button id="btn-edit" class="btn btn-primary" type="button">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" /></svg>
+          编辑 URL 地址
+        </button>
+        <button id="btn-download" class="btn btn-success" type="button">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="M7 10l5 5 5-5" /><path d="M12 15V3" /></svg>
+          下载二维码
+        </button>
+        <button id="btn-deck" class="btn btn-ghost" type="button">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
+          常用二维码
+        </button>
+      </div>
+    </main>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

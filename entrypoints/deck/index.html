@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="manifest.type" content="page" />
+    <title>Quico Deck 常用二维码</title>
+    <link rel="icon" href="/icon/48.png" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- 左栏: 配置文本 -->
+      <section class="card editor">
+        <p class="text-muted hint">
+          每行一条, 格式: <code>[名称](URL)</code>, 内容自动保存
+        </p>
+        <textarea id="input-urls" class="textarea mono" rows="26" spellcheck="false"></textarea>
+        <button id="btn-render" class="btn btn-success" type="button">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
+          飞过来
+        </button>
+      </section>
+
+      <!-- 右栏: 二维码列表 -->
+      <section id="result-list" class="results"></section>
+    </div>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

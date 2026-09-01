@@ -1,5 +1,14 @@
-bower_components
-.idea/
+# deps
 node_modules
+
+# wxt build output
 dist
+.wxt
+stats.html
+
+# release packages
 releases
+
+# IDE
+.idea/
+.DS_Store
